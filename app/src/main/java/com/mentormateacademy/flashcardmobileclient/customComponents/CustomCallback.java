@@ -63,24 +63,28 @@ public class CustomCallback implements ActionMode.Callback {
     @Override
     public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
 
+        // get content from editText element
+        String editTextContent = editTextContext.getText().toString().trim();
+        String[] words = editTextContent.split(" ");
+
+        //
         if (item.getItemId() == R.id.bold_item) {
 
-            styleWordNode("b");
-            return true;
+            styleWordNode(editTextContent, words, "b");
+            return false;
         }
 
         if (item.getItemId() == R.id.italic_item) {
 
-            styleWordNode("i");
-            return true;
+            styleWordNode(editTextContent, words, "i");
+            return false;
         }
 
-        return false;
+        return true;
     }
 
     @Override
     public void onDestroyActionMode(ActionMode mode) {
-//        mode.finish();
     }
 
 
@@ -88,51 +92,62 @@ public class CustomCallback implements ActionMode.Callback {
      * CONTROL METHODS
      =================================================================*/
 
-    private void styleWordNode(String styleElement) {
+    /**
+     * @param content
+     * @param words
+     * @param styleElement
+     */
+    private void styleWordNode(String content, String[] words, String styleElement) {
 
-        mapEditTextContent();
+        // map words
+        mapEditTextContent(content, words);
 
+        // start
         int start = editTextContext.getSelectionStart();
         int end = editTextContext.getSelectionEnd();
 
         // extract the word
-        String word = editTextContext.getText().toString().substring(start, end);
+        String word = content.substring(start, end);
 
-        if (wordTree.containsKey(word)) {
-            wordTree.get(word).add(styleElement);
-        }
+        // change style of the element
+        setStyleAttributeToWordNode(word, styleElement);
 
-        String result = splitEditTextWords();
+        // commit result
+        String result = setWordNodeStyleAttribute(words);
         Spanned htmlResult = Html.fromHtml(result);
         editTextContext.setText(htmlResult);
     }
 
     /**
      *
+     * @param wordNode
+     * @param styleElement
      */
-    private void mapEditTextContent() {
+    private void setStyleAttributeToWordNode(String wordNode, String styleElement) {
 
-        String editTextContent = editTextContext.getText().toString().trim();
+        if (wordTree.containsKey(wordNode)) {
 
-        // This is a new text information and the algoritum neads to map
-        // the whole code for the first time
-        if (editTextCash == null) {
+            ArrayList<String> styleAttributes = wordTree.get(wordNode);
 
-            String[] words = editTextContent.split(" ");
+            if (styleAttributes.contains(styleElement)) {
+                styleAttributes.remove(styleElement);
+            } else {
+                styleAttributes.add(styleElement);
+            }
+        }
+    }
+
+    /**
+     * @param content
+     * @param words
+     */
+    private void mapEditTextContent(String content, String[] words) {
+
+        if (editTextCash == null || !content.equals(editTextCash)) {
             map(words);
 
             // cash the input text into a local variable
-            editTextCash = editTextContent;
-        } else {
-            boolean areEquals = editTextContent.equals(editTextCash);
-
-            if (!areEquals) {
-                String[] words = editTextContent.split(" ");
-                map(words);
-
-                // cash the input text into a local variable
-                editTextCash = editTextContent;
-            }
+            editTextCash = content;
         }
     }
 
@@ -148,11 +163,11 @@ public class CustomCallback implements ActionMode.Callback {
         }
     }
 
-
-    private String splitEditTextWords() {
-
-        // split the word
-        String[] words = editTextContext.getText().toString().trim().split(" ");
+    /**
+     *
+     * @return
+     */
+    private String setWordNodeStyleAttribute(String[] words) {
 
         // sample StringBuilder
         StringBuilder builder = new StringBuilder();
@@ -161,7 +176,6 @@ public class CustomCallback implements ActionMode.Callback {
         for (String word : words) {
 
             String wordElement = word;
-
             ArrayList<String> element = wordTree.get(word);
 
             if (element.contains("b")) {
@@ -177,6 +191,4 @@ public class CustomCallback implements ActionMode.Callback {
 
         return builder.toString();
     }
-
-
 }
