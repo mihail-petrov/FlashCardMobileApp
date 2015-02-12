@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/bold_item"
+        android:icon="@drawable/ic_format_bold_white_18dp"
+        android:title="bold" />
+
+    <item
+        android:id="@+id/italic_item"
+        android:icon="@drawable/ic_format_italic_white_18dp"
+        android:title="italic" />
+
+    <item
+        android:id="@+id/color_item"
+        android:icon="@drawable/ic_format_color_text_white_18dp"
+        android:title="color" />
+</menu>

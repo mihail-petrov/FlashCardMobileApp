@@ -9,7 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 
-import com.mentormateacademy.demoapp.R;
+import com.mentormateacademy.flashcardmobileclient.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,13 +19,30 @@ import java.util.Map;
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class CustomCallback implements ActionMode.Callback {
 
-    private Map<String, ArrayList<String>> wordTree;
-    private EditText contextEditText;
+    /**
+     * PROPERTIES
+     * =================================================================
+     */
 
-    public CustomCallback(EditText context){
-        this.contextEditText = context;
+    private Map<String, ArrayList<String>> wordTree;
+    private EditText editTextContext;
+
+    private String editTextCash = null;
+
+    /**
+     * CONSTRUCTORS
+     * =================================================================
+     */
+
+    public CustomCallback(EditText context) {
+        this.editTextContext = context;
         wordTree = new HashMap<>();
     }
+
+    /**
+     * PUBLIC METHODS
+     * =================================================================
+     */
 
     @Override
     public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
@@ -48,109 +65,118 @@ public class CustomCallback implements ActionMode.Callback {
 
         if (item.getItemId() == R.id.bold_item) {
 
-            // check the content
-            mapEditTextContent();
-
-            int start = contextEditText.getSelectionStart();
-            int end   = contextEditText.getSelectionEnd();
-
-            // extract the word
-            String word = contextEditText.getText().toString().substring(start, end);
-
-            if (wordTree.containsKey(word)) {
-                wordTree.get(word).add("b");
-            }
-
-            String result       = splitEditTextWords();
-            Spanned htmlResult  = Html.fromHtml(result);
-            contextEditText.setText(htmlResult);
-
-            // TODO: Remove and wrap
-            mode.finish();
+            styleWordNode("b");
             return true;
         }
 
         if (item.getItemId() == R.id.italic_item) {
 
-                // check the content
-                mapEditTextContent();
-
-                int start = contextEditText.getSelectionStart();
-                int end = contextEditText.getSelectionEnd();
-
-                // extract the word
-                String word = contextEditText.getText().toString().substring(start, end);
-
-                if (wordTree.containsKey(word)) {
-                    wordTree.get(word).add("i");
-                }
-
-                String result = splitEditTextWords();
-                Spanned htmlResult = Html.fromHtml(result);
-                contextEditText.setText(htmlResult);
-
-                // TODO: Remove and wrap
-                mode.finish();
-                return true;
-            }
+            styleWordNode("i");
+            return true;
+        }
 
         return false;
     }
 
     @Override
     public void onDestroyActionMode(ActionMode mode) {
-
+//        mode.finish();
     }
 
-    public void mapEditTextContent(){
-        // split the word
-        String[] words = contextEditText.getText().toString().split(" ");
 
-        for (int i = 0; i < words.length; i++) {
+    /**
+     * CONTROL METHODS
+     =================================================================*/
 
-            String wordElement = words[i];
+    private void styleWordNode(String styleElement) {
 
-            if(!wordTree.containsKey(words[i]))
-            {
-                wordTree.put(words[i], new ArrayList<String>());
+        mapEditTextContent();
+
+        int start = editTextContext.getSelectionStart();
+        int end = editTextContext.getSelectionEnd();
+
+        // extract the word
+        String word = editTextContext.getText().toString().substring(start, end);
+
+        if (wordTree.containsKey(word)) {
+            wordTree.get(word).add(styleElement);
+        }
+
+        String result = splitEditTextWords();
+        Spanned htmlResult = Html.fromHtml(result);
+        editTextContext.setText(htmlResult);
+    }
+
+    /**
+     *
+     */
+    private void mapEditTextContent() {
+
+        String editTextContent = editTextContext.getText().toString().trim();
+
+        // This is a new text information and the algoritum neads to map
+        // the whole code for the first time
+        if (editTextCash == null) {
+
+            String[] words = editTextContent.split(" ");
+            map(words);
+
+            // cash the input text into a local variable
+            editTextCash = editTextContent;
+        } else {
+            boolean areEquals = editTextContent.equals(editTextCash);
+
+            if (!areEquals) {
+                String[] words = editTextContent.split(" ");
+                map(words);
+
+                // cash the input text into a local variable
+                editTextCash = editTextContent;
             }
         }
     }
 
-    public String splitEditTextWords() {
+    /**
+     * @param words
+     */
+    private void map(String[] words) {
+        // map the elements
+        for (String word : words) {
+            if (!wordTree.containsKey(word)) {
+                wordTree.put(word, new ArrayList<String>());
+            }
+        }
+    }
+
+
+    private String splitEditTextWords() {
 
         // split the word
-        String[] words = contextEditText.getText().toString().split(" ");
+        String[] words = editTextContext.getText().toString().trim().split(" ");
 
         // sample StringBuilder
         StringBuilder builder = new StringBuilder();
 
         // put every word into the HashMap
-        for (int i = 0; i < words.length; i++) {
+        for (String word : words) {
 
-            String wordElement = words[i];
+            String wordElement = word;
 
-            if(!wordTree.containsKey(words[i])){ // The element does not exists INIT MODE
-                wordTree.put(words[i], new ArrayList<String>());
-            }
-            else { // EDIT MODE
+            ArrayList<String> element = wordTree.get(word);
 
-                // get element
-                ArrayList<String> element = wordTree.get(words[i]);
-
-                if(element.contains("b")){
-                    wordElement = "<b>" + wordElement + "</b>";
-                }
-
-                if(element.contains("i")){
-                    wordElement = "<i>" + wordElement + "</i>";
-                }
+            if (element.contains("b")) {
+                wordElement = "<b>" + wordElement + "</b>";
             }
 
-            builder.append(wordElement + " ");
+            if (element.contains("i")) {
+                wordElement = "<i>" + wordElement + "</i>";
+            }
+
+            builder.append(wordElement).append(" ");
         }
 
         return builder.toString();
     }
+
 
 }
