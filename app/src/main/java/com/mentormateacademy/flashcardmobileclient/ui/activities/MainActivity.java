@@ -1,10 +1,9 @@
-package com.mentormateacademy.flashcardmobileclient.activities;
+package com.mentormateacademy.flashcardmobileclient.ui.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 
 import com.mentormateacademy.flashcardmobileclient.R;
-
 
 public class MainActivity extends ActionBarActivity {
 
