@@ -6,7 +6,7 @@ import android.support.v7.app.ActionBarActivity;
 import com.mentormateacademy.flashcardmobileclient.R;
 
 
-public class MainActivity extends ActionBarActivity {
+public class RichEditTextActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
