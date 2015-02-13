@@ -1,7 +1,40 @@
 package com.mentormateacademy.flashcardmobileclient.database.helper;
 
-/**
- * Created by p_m_t_000 on 2/12/2015.
- */
-public class DatabaseHelper {
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
+import com.mentormateacademy.flashcardmobileclient.configurations.DatabaseConfiguration;
+
+public class DatabaseHelper extends SQLiteOpenHelper {
+
+    public DatabaseHelper(Context context) {
+        super(context, DatabaseConfiguration.DB_NAME, null, DatabaseConfiguration.DB_VERSION);
+    }
+
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+
+        // create table deck
+        db.execSQL(DatabaseConfiguration.TABLE_DECKS_CREATE_QUERY);
+        Log.d("DB_HELPER_LOG", "Create table query : " + DatabaseConfiguration.TABLE_DECKS_CREATE_QUERY);
+
+        // create table cards
+        db.execSQL(DatabaseConfiguration.TABLE_CARDS_CREATE_QUERY);
+        Log.d("DB_HELPER_LOG", "Create table query : " + DatabaseConfiguration.TABLE_CARDS_CREATE_QUERY);
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
+        // drop category table
+        db.execSQL(DatabaseConfiguration.TABLE_DECKS_DROP_QUERY);
+
+        // drop notes table
+        db.execSQL(DatabaseConfiguration.TABLE_CARDS_DROP_QUERY);
+
+        // create table new
+        onCreate(db);
+    }
 }
