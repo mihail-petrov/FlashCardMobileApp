@@ -14,11 +14,12 @@ import android.widget.ImageView;
 
 import com.mentormateacademy.flashcardmobileclient.R;
 
-public class ImageGaleryActivity extends ActionBarActivity {
-
+public class ImageGalleryActivity extends ActionBarActivity {
 
     private ImageView flashCardImageView;
     private Button getImageButton;
+
+    private String imagePath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,9 +28,23 @@ public class ImageGaleryActivity extends ActionBarActivity {
 
         //
         getImageButton = (Button) findViewById(R.id.getImageButton);
+
         flashCardImageView = (ImageView) findViewById(R.id.flashCardImageView);
 
+
+        if (savedInstanceState != null) {
+            if (savedInstanceState.getString("IMG_ELEMENT") != null) {
+
+                imagePath = savedInstanceState.getString("IMG_ELEMENT");
+
+                Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
+                flashCardImageView.setImageBitmap(bitmap);
+
+            }
+        }
+
         getImageButton.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
 
@@ -42,18 +57,26 @@ public class ImageGaleryActivity extends ActionBarActivity {
         });
     }
 
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        savedInstanceState.putString("IMG_ELEMENT", imagePath);
+        super.onSaveInstanceState(savedInstanceState);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
             if (requestCode == 1) {
+
                 Uri selectedImageUri = data.getData();
-                String selectedImagePath = getPath(selectedImageUri);
-//                Log.d("IMG_PATH", selectedImagePath);
 
-                Bitmap bitmap = BitmapFactory.decodeFile(selectedImagePath);
+                //
+                imagePath = getPath(selectedImageUri);
+
+                //
+                Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
                 flashCardImageView.setImageBitmap(bitmap);
-
-
             }
         }
     }
