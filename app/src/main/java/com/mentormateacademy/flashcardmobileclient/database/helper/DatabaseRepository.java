@@ -27,7 +27,7 @@ public class DatabaseRepository {
     /*
      ==============================================================*/
 
-    public DatabaseRepository getRepository(Context context) {
+    public static DatabaseRepository getRepository(Context context) {
 
         if (repositoryInstance == null) {
             repositoryInstance = new DatabaseRepository(context);

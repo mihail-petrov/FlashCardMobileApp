@@ -2,9 +2,6 @@ package com.mentormateacademy.flashcardmobileclient.helpers;
 
 import java.util.Random;
 
-/**
- * Created by p_m_t_000 on 2/13/2015.
- */
 public class RandomGenerator {
 
     private static final String alphabetCollection = "abcdefghijklmnopqrstuvwxyz";
@@ -19,7 +16,6 @@ public class RandomGenerator {
     }
 
     /**
-     *
      * @param minLength
      * @param maxLength
      * @param addSpace
@@ -44,7 +40,6 @@ public class RandomGenerator {
     }
 
     /**
-     *
      * @param maxLength
      * @return
      */
@@ -53,7 +48,6 @@ public class RandomGenerator {
     }
 
     /**
-     *
      * @param minLength
      * @param maxLength
      * @return
