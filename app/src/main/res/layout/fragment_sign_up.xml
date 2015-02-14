@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:hint="@string/username_hint"
+        android:textSize="25sp"
+        android:id="@+id/usernameSignUpEditText" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:inputType="textPassword"
+        android:textSize="25sp"
+        android:hint="@string/password_hint"
+        android:id="@+id/passwordSignUpEditText"
+        android:layout_gravity="center_horizontal" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:inputType="textPassword"
+        android:textSize="25sp"
+        android:hint="@string/confirm_password_hint"
+        android:id="@+id/confirmPasswordSignUpEditText"
+        android:layout_gravity="center_horizontal" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="75dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:textSize="25sp"
+        android:text="@string/sign_up_button_text"
+        android:id="@+id/signUpButton"
+        android:layout_gravity="center_horizontal" />
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/log_in_button_text"
+        android:id="@+id/logInButton"
+        android:layout_marginTop="25sp"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:textSize="15sp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true" />
+
+
+</LinearLayout>
