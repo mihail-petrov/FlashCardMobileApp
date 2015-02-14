@@ -2,6 +2,7 @@ package com.mentormateacademy.flashcardmobileclient.database.seeder;
 
 import android.app.Application;
 import android.content.Context;
+import android.util.Log;
 
 import com.mentormateacademy.flashcardmobileclient.database.helper.DatabaseRepository;
 import com.mentormateacademy.flashcardmobileclient.helpers.RandomGenerator;
@@ -11,8 +12,8 @@ import com.mentormateacademy.flashcardmobileclient.models.Deck;
 
 public class DatabaseSeeder extends Application {
 
-    private static final boolean SEED_DATABASE = false;
-    private static final boolean DELETE_TABLES_BEFORE_SEED = false;
+    private static final boolean SEED_DATABASE = true;
+    private static final boolean DELETE_TABLES_BEFORE_SEED = true;
     private DatabaseRepository databaseRepository;
     private Context context;
 
@@ -33,6 +34,8 @@ public class DatabaseSeeder extends Application {
 
     public void seedDatabase() {
 
+        Log.d("DB_HELPER", "Start seed database table");
+
         RandomGenerator randomGenerator = new RandomGenerator();
 
         for (int i = 0; i < 10; i++) {
@@ -43,7 +46,7 @@ public class DatabaseSeeder extends Application {
             deckObject.setTitle(deckTitle);
 
             // add new object to the database
-            databaseRepository.getDeckRepository().create(deckObject);
+            this.databaseRepository.getDeckRepository().create(deckObject);
         }
 
         for (int i = 0; i < 10; i++) {

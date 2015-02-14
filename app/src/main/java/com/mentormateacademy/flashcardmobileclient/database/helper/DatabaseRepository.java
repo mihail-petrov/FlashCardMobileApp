@@ -8,24 +8,15 @@ import com.mentormateacademy.flashcardmobileclient.database.repositories.DeckRep
 
 public class DatabaseRepository {
 
-    /*
-     ==============================================================*/
-
     private static DatabaseRepository repositoryInstance = null;
 
     private DeckRepository deckRepository;
     private CardRepository cardRepository;
 
-    /*
-     ==============================================================*/
-
     private DatabaseRepository(Context context) {
         this.deckRepository = new DeckRepository(context);
         this.cardRepository = new CardRepository(context);
     }
-
-    /*
-     ==============================================================*/
 
     public static DatabaseRepository getRepository(Context context) {
 
@@ -34,9 +25,6 @@ public class DatabaseRepository {
         }
         return repositoryInstance;
     }
-
-    /*
-     ==============================================================*/
 
     public DeckRepository getDeckRepository() {
         return this.deckRepository;
