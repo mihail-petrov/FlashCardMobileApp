@@ -39,7 +39,50 @@ public class CardRepository extends Repository<Card> {
 
     @Override
     public ArrayList<Card> readAll() {
-        return null;
+
+        // create empty ArrayList
+        ArrayList<Card> cardArrayList = new ArrayList<>();
+
+        // get cursor
+        Cursor cardCursorPointer = readAllCursor();
+        while (cardCursorPointer.moveToNext()) {
+
+            // get all database fields
+            long id = cardCursorPointer.getLong(cardCursorPointer
+                    .getColumnIndex("_id"));
+            long deckId = cardCursorPointer.getLong(cardCursorPointer
+                    .getColumnIndex("deck_id"));
+
+            String frontTitle = cardCursorPointer.getString(cardCursorPointer
+                    .getColumnIndex("front_title"));
+            String frontContent = cardCursorPointer.getString(cardCursorPointer
+                    .getColumnIndex("front_content"));
+
+            String backTitle = cardCursorPointer.getString(cardCursorPointer
+                    .getColumnIndex("back_title"));
+            String backContent = cardCursorPointer.getString(cardCursorPointer
+                    .getColumnIndex("back_content"));
+
+            String extraTitle = cardCursorPointer.getString(cardCursorPointer
+                    .getColumnIndex("extra_title"));
+            String extraContent = cardCursorPointer.getString(cardCursorPointer
+                    .getColumnIndex("extra_content"));
+
+
+            Card cardObject = new Card();
+            cardObject.setId(id);
+            cardObject.setDeckId(deckId);
+            cardObject.setFrontTitle(frontTitle);
+            cardObject.setFrontContent(frontContent);
+            cardObject.setBackTitle(backTitle);
+            cardObject.setBackContent(backContent);
+            cardObject.setExtraTitle(extraTitle);
+            cardObject.setExtraContent(extraContent);
+
+            cardArrayList.add(cardObject);
+        }
+
+        return cardArrayList;
     }
 
     @Override
