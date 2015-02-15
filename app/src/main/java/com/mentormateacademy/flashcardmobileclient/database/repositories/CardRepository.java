@@ -87,7 +87,7 @@ public class CardRepository extends Repository<Card> {
 
     @Override
     public Cursor readAllCursor() {
-        return null;
+        return getDatabase().query(DatabaseConfiguration.TABLE_CARDS, null, null, null, null, null, null);
     }
 
     @Override

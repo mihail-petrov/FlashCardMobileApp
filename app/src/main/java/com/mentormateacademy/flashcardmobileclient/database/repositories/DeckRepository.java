@@ -26,12 +26,30 @@ public class DeckRepository extends Repository<Deck> {
 
     @Override
     public ArrayList<Deck> readAll() {
-        return null;
+        // create empty ArrayList
+        ArrayList<Deck> decksArrayList = new ArrayList<>();
+
+        // get cursor
+        Cursor deckCursorPointer = readAllCursor();
+        while (deckCursorPointer.moveToNext()) {
+
+            // get all elements
+            long id = deckCursorPointer.getLong(deckCursorPointer.getColumnIndex("_id"));
+            String title = deckCursorPointer.getString(deckCursorPointer.getColumnIndex("title"));
+
+            Deck deck = new Deck();
+            deck.setId(id);
+            deck.setTitle(title);
+
+            decksArrayList.add(deck);
+        }
+
+        return decksArrayList;
     }
 
     @Override
     public Cursor readAllCursor() {
-        return null;
+        return getDatabase().query(DatabaseConfiguration.TABLE_DECKS, null, null, null, null, null, null);
     }
 
     @Override
