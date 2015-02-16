@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/action_settings"
+    <item android:id="@+id/crete_new_menu_item"
         android:title="@string/new_deck_menu_item_text"
         android:orderInCategory="1"
         app:showAsAction="ifRoom" />

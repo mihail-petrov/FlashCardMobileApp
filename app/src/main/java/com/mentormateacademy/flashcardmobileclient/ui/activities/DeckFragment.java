@@ -77,8 +77,15 @@ public class DeckFragment extends Fragment{
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            default:
-                break;
+            case R.id.crete_new_menu_item:
+                NewDeckFragment newDeckFragment = new NewDeckFragment();
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.replace(R.id.container, newDeckFragment);
+                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                ft.addToBackStack(null);
+                ft.commit();
+                return true;
+
         }
 
         return false;

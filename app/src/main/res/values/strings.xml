@@ -14,5 +14,9 @@
     <string name="new_deck_menu_item_text">NEW</string>
     <string name="your_decks_activity_title">Your Decks</string>
     <string name="start_study_button_text">Start Study</string>
+    <string name="create_deck_button_text">Create Deck</string>
+    <string name="description_hint">Description</string>
+    <string name="deck_subject_hint">Deck Subject</string>
+    <string name="deck_name_hint">Deck Name</string>
 
 </resources>
