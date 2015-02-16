@@ -1,9 +1,11 @@
 package com.mentormateacademy.flashcardmobileclient.ui.activities;
 
+import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -52,9 +54,35 @@ public class ManageFlashCardsActivity extends ActionBarActivity {
         if (id == R.id.action_settings) {
             return true;
         }
+        if(id == android.R.id.home) {
+            Log.d("Up button", "Up button pressed");
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            fragmentAdded = false;
+            finish();
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onBackPressed() {
+        DeckFragment deckFragment = null;
+        try{
+            deckFragment = (DeckFragment) getSupportFragmentManager().findFragmentById(R.id.container);
+        }catch (ClassCastException e){}
+        if(deckFragment != null) {
+            Log.d("DeckFragment", "onBackPressed() Called");
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            fragmentAdded = false;
+            finish();
+        }else {
+            super.onBackPressed();
+        }
+    }
+
 
 
 }
