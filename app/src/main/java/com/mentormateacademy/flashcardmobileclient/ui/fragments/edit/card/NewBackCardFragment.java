@@ -1,4 +1,4 @@
-package com.mentormateacademy.flashcardmobileclient.ui.fragments.edit;
+package com.mentormateacademy.flashcardmobileclient.ui.fragments.edit.card;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,16 +10,27 @@ import android.widget.EditText;
 
 import com.mentormateacademy.flashcardmobileclient.R;
 
-public class NewFrontCardFragment extends Fragment {
+public class NewBackCardFragment extends Fragment {
+
+
+    public NewBackCardFragment() {
+
+    }
+
+    public static NewBackCardFragment newInstance() {
+
+        NewBackCardFragment fragment = new NewBackCardFragment();
+        return fragment;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View fragmentView = inflater.inflate(R.layout.fragment_new_card_layout, container, false);
+        View fragmentView = inflater.inflate(R.layout.fragment_new_card_back_layout, container, false);
 
         EditText newCardScreenTitleEditText = (EditText) fragmentView.findViewById(R.id.newCardScreenTitleEditText);
         EditText newCardContentEditText = (EditText) fragmentView.findViewById(R.id.newCardContentEditText);
 
-        return super.onCreateView(inflater, container, savedInstanceState);
+        return fragmentView;
     }
 }

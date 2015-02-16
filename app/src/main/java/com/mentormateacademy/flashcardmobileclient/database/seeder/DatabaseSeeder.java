@@ -12,8 +12,8 @@ import com.mentormateacademy.flashcardmobileclient.models.Deck;
 
 public class DatabaseSeeder extends Application {
 
-    private static final boolean SEED_DATABASE = true;
-    private static final boolean DELETE_TABLES_BEFORE_SEED = true;
+    private static final boolean SEED_DATABASE = false;
+    private static final boolean DELETE_TABLES_BEFORE_SEED = false;
     private DatabaseRepository databaseRepository;
     private Context context;
 

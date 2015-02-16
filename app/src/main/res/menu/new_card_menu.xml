@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/clear_all_cards"
+        android:title="clear all"></item>
+
+    <item
+        android:id="@+id/clear_this_cards"
+        android:title="clear this"></item>
+
+    <item
+        android:id="@+id/save_card"
+        android:title="save"></item>
+
+</menu>

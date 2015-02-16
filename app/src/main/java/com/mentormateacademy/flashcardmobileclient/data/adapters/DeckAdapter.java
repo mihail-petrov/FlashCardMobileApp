@@ -3,7 +3,6 @@ package com.mentormateacademy.flashcardmobileclient.data.adapters;
 import android.content.Context;
 import android.database.Cursor;
 import android.support.v4.widget.CursorAdapter;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -31,8 +30,6 @@ public class DeckAdapter extends CursorAdapter {
 
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
-
-        Log.d("RESULT_VIEW", cursor.getString(cursor.getColumnIndex("title")));
 
         ViewHolder holder = (ViewHolder) view.getTag();
         holder.title.setText(cursor.getString(cursor.getColumnIndex("title")));

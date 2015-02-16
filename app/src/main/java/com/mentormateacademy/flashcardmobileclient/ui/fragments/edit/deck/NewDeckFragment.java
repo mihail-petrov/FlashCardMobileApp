@@ -1,4 +1,4 @@
-package com.mentormateacademy.flashcardmobileclient.ui.fragments.edit;
+package com.mentormateacademy.flashcardmobileclient.ui.fragments.edit.deck;
 
 import android.app.Activity;
 import android.os.Bundle;
