@@ -1,6 +1,7 @@
 package com.mentormateacademy.flashcardmobileclient.ui.activities;
 
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -141,7 +142,9 @@ public class LogInFragment extends Fragment implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.logInButton:
-
+                Intent newIntent = new Intent(getActivity(), ManageFlashCardsActivity.class);
+                startActivity(newIntent);
+                getActivity().finish();
                 break;
             case R.id.signUpButton:
                 SignUpFragment signUpFragment = new SignUpFragment();

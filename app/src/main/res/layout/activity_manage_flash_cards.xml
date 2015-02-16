@@ -1,0 +1,24 @@
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/mainLinearLayout">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="5dp" />
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        tools:context="com.mentormateacademy.flashcardmobileclient.ui.activities.ManageFlashCardsActivity"
+        tools:ignore="MergeRootFrame"/>
+
+</LinearLayout>
