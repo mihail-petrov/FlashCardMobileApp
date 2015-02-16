@@ -11,17 +11,25 @@ import com.mentormateacademy.flashcardmobileclient.R;
 
 public class ManageFlashCardsActivity extends ActionBarActivity {
 
+    public static final String SELECTED_DECK_NAME = "deckName";
+
+    private static boolean fragmentAdded = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_flash_cards);
 
-        DeckFragment deckFragment = new DeckFragment();
-        FragmentManager manager = getSupportFragmentManager();
-        FragmentTransaction ft = manager.beginTransaction();
-        ft.add(R.id.container, deckFragment);
-        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        ft.commit();
+        if(!fragmentAdded) {
+            DeckFragment deckFragment = new DeckFragment();
+            FragmentManager manager = getSupportFragmentManager();
+            FragmentTransaction ft = manager.beginTransaction();
+            ft.add(R.id.container, deckFragment);
+            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+            ft.commit();
+
+            fragmentAdded = true;
+        }
 
     }
 

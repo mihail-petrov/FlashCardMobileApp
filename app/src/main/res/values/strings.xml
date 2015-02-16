@@ -13,5 +13,6 @@
     <string name="title_activity_manage_flash_cards">FlashCardsActivity</string>
     <string name="new_deck_menu_item_text">NEW</string>
     <string name="your_decks_activity_title">Your Decks</string>
+    <string name="start_study_button_text">Start Study</string>
 
 </resources>

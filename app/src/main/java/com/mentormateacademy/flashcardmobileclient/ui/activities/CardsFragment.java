@@ -4,7 +4,6 @@ package com.mentormateacademy.flashcardmobileclient.ui.activities;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -13,18 +12,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.mentormateacademy.flashcardmobileclient.R;
 
+public class CardsFragment extends Fragment{
 
-public class DeckFragment extends Fragment{
-
-    private ListView listViewDecks;
+    private ListView listViewCards;
+    private Button buttonStartStudy;
+    private String deckName;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_decks, container, false);
+        deckName = this.getArguments().getString(ManageFlashCardsActivity.SELECTED_DECK_NAME);
+        return inflater.inflate(R.layout.fragment_cards, container, false);
     }
 
     @Override
@@ -32,34 +34,37 @@ public class DeckFragment extends Fragment{
         super.onActivityCreated(savedInstanceState);
 
         initializeListView();
-        getActivity().setTitle(getActivity().getString(R.string.your_decks_activity_title));
+        initializeButton();
+        getActivity().setTitle(deckName);
     }
 
     private void initializeListView() {
-        final String[] sampleDecks = new String[]{
-                "Deck 1", "Deck 2", "Deck 3", "Deck 4", "Deck 5",
-                "Deck 6", "Deck 7", "Deck 8", "Deck 9", "Deck 10"
+        String[] sampleCards = new String[]{
+                "Card 1", "Card 2", "Card 3", "Card 4", "Card 5",
+                "Card 6", "Card 7", "Card 8", "Card 9", "Card 10"
         };
 
-        listViewDecks = (ListView) getActivity().findViewById(R.id.deckListView);
-        ArrayAdapter adapter = new ArrayAdapter(getActivity(),android.R.layout.simple_list_item_1, sampleDecks);
-        listViewDecks.setAdapter(adapter);
-        listViewDecks.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listViewCards = (ListView) getActivity().findViewById(R.id.cardsListView);
+        ArrayAdapter adapter = new ArrayAdapter(getActivity(),android.R.layout.simple_list_item_1, sampleCards);
+        listViewCards.setAdapter(adapter);
+        listViewCards.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //Add fragment containing the cards in the deck
-                CardsFragment cardsFragment = new CardsFragment();
-                Bundle args = new Bundle();
-                args.putString(ManageFlashCardsActivity.SELECTED_DECK_NAME, sampleDecks[position]);
-                cardsFragment.setArguments(args);
-                FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.replace(R.id.container, cardsFragment);
-                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                ft.addToBackStack(null);
-                ft.commit();
+                //Do something e.g. edit card
             }
         });
     }
+
+    private void initializeButton() {
+        buttonStartStudy = (Button) getActivity().findViewById(R.id.startStudyButton);
+        buttonStartStudy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Do something
+            }
+        });
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
