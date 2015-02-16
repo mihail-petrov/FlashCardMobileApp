@@ -18,5 +18,8 @@
     <string name="description_hint">Description</string>
     <string name="deck_subject_hint">Deck Subject</string>
     <string name="deck_name_hint">Deck Name</string>
+    <string name="create_new_deck_title">Create New Deck</string>
+    <string name="card_name_hint">Card Name</string>
+    <string name="note_content_hint">Note Content</string>
 
 </resources>

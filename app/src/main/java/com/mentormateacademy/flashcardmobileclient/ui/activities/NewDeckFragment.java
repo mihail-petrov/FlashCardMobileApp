@@ -34,6 +34,7 @@ public class NewDeckFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        getActivity().setTitle(getActivity().getString(R.string.create_new_deck_title));
         initializeViews();
         setListeners();
     }
@@ -59,6 +60,7 @@ public class NewDeckFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                //Handle hint location in the edit text
                 if(TextUtils.isEmpty(s)){
                     editTextDeckDescription.setGravity(Gravity.CENTER);
                 }else {
