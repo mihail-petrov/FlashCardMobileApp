@@ -13,8 +13,9 @@ import com.mentormateacademy.flashcardmobileclient.R;
 
 public class MainActivity extends ActionBarActivity {
 
-    private static boolean addFragmentOnce = false;
     private LinearLayout linearLayoutMain;
+
+    public static final double BASE_INCHES = 3.88730126323;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,12 +23,6 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         setObserverOnMainLayout();
-
-        if(!addFragmentOnce) {
-            addInitialFragment();
-            addFragmentOnce =true;
-        }
-
 
     }
 
