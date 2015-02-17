@@ -14,6 +14,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:id="@+id/textView2"
+            android:textSize="@dimen/small_text_size"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true" />
 
@@ -21,17 +22,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
+            android:textSize="@dimen/large_text_size"
             android:hint="@string/card_name_hint"
             android:id="@+id/cardNameEditText2"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="@dimen/log_in_edit_text_top_margin"
             android:layout_below="@+id/textView2" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minLines="7"
+            android:textSize="@dimen/large_text_size"
             android:hint="@string/note_content_hint"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="@dimen/log_in_edit_text_top_margin"
             android:gravity="center"
             android:scrollbars="vertical"
             android:id="@+id/noteContentEditText2"

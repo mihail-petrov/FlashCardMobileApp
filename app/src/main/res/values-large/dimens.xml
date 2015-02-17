@@ -5,10 +5,11 @@
     <dimen name="log_in_edit_text_top_margin">62dp</dimen>
     <dimen name="log_in_button_log_in_top_margin">94dp</dimen>
     <dimen name="log_in_button_log_in_bottom_margin">31dp</dimen>
-    <dimen name="log_in_sign_up_buttons_left_right_margin">19dp</dimen>
-    <dimen name="log_in_sign_up_large_text_size">31sp</dimen>
-    <dimen name="log_in_sign_up_small_text_size">19sp</dimen>
+    <dimen name="buttons_left_right_margin">19dp</dimen>
+    <dimen name="large_text_size">31sp</dimen>
+    <dimen name="small_text_size">19sp</dimen>
     <dimen name="sign_up_edit_text_top_margin">37dp</dimen>
     <dimen name="sign_up_button_sign_up_top_margin">62dp</dimen>
     <dimen name="sign_up_button_log_in_top_margin">31dp</dimen>
+    <dimen name="new_deck_margin">25sp</dimen>
 </resources>

@@ -15,16 +15,18 @@
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
             android:hint="@string/deck_name_hint"
+            android:textSize="@dimen/large_text_size"
             android:id="@+id/deckNameEditText"
-            android:layout_marginTop="25dp" />
+            android:layout_marginTop="@dimen/new_deck_margin" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
+            android:textSize="@dimen/large_text_size"
             android:hint="@string/deck_subject_hint"
             android:id="@+id/deckSubjectEditText"
-            android:layout_marginTop="25dp" />
+            android:layout_marginTop="@dimen/new_deck_margin" />
 
 
         <EditText
@@ -34,9 +36,10 @@
             android:hint="@string/description_hint"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
+            android:textSize="@dimen/large_text_size"
             android:layout_below="@+id/deckSubjectEditText"
-            android:layout_marginBottom="15dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginBottom="@dimen/buttons_left_right_margin"
+            android:layout_marginTop="@dimen/new_deck_margin"
             android:id="@+id/deckDescriptionEditText"/>
 
         <Spinner
@@ -47,9 +50,10 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="@dimen/large_text_size"
             android:text="@string/create_deck_button_text"
             android:id="@+id/createDeckButton"
-            android:layout_marginTop="15dp" />
+            android:layout_marginTop="@dimen/buttons_left_right_margin" />
 
     </LinearLayout>
 </ScrollView>

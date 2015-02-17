@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/sign_up_edit_text_top_margin"
         android:hint="@string/username_hint"
-        android:textSize="@dimen/log_in_sign_up_large_text_size"
+        android:textSize="@dimen/large_text_size"
         android:id="@+id/usernameSignUpEditText" />
 
     <EditText
@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/sign_up_edit_text_top_margin"
         android:inputType="textPassword"
-        android:textSize="@dimen/log_in_sign_up_large_text_size"
+        android:textSize="@dimen/large_text_size"
         android:hint="@string/password_hint"
         android:id="@+id/passwordSignUpEditText"
         android:layout_gravity="center_horizontal" />
@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/sign_up_edit_text_top_margin"
         android:inputType="textPassword"
-        android:textSize="@dimen/log_in_sign_up_large_text_size"
+        android:textSize="@dimen/large_text_size"
         android:hint="@string/confirm_password_hint"
         android:id="@+id/confirmPasswordSignUpEditText"
         android:layout_gravity="center_horizontal" />
@@ -37,9 +37,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/sign_up_button_sign_up_top_margin"
-        android:layout_marginRight="@dimen/log_in_sign_up_buttons_left_right_margin"
-        android:layout_marginLeft="@dimen/log_in_sign_up_buttons_left_right_margin"
-        android:textSize="@dimen/log_in_sign_up_large_text_size"
+        android:layout_marginRight="@dimen/buttons_left_right_margin"
+        android:layout_marginLeft="@dimen/buttons_left_right_margin"
+        android:textSize="@dimen/large_text_size"
         android:text="@string/sign_up_button_text"
         android:id="@+id/signUpButton"
         android:layout_gravity="center_horizontal" />
@@ -51,9 +51,9 @@
         android:text="@string/log_in_button_text"
         android:id="@+id/logInButton"
         android:layout_marginTop="@dimen/sign_up_button_log_in_top_margin"
-        android:layout_marginRight="@dimen/log_in_sign_up_buttons_left_right_margin"
-        android:layout_marginLeft="@dimen/log_in_sign_up_buttons_left_right_margin"
-        android:textSize="@dimen/log_in_sign_up_small_text_size"
+        android:layout_marginRight="@dimen/buttons_left_right_margin"
+        android:layout_marginLeft="@dimen/buttons_left_right_margin"
+        android:textSize="@dimen/small_text_size"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true" />
 

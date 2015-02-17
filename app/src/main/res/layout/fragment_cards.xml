@@ -14,9 +14,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/startStudyButton"
         android:text="@string/start_study_button_text"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="15dp"
-        android:textSize="15sp"
+        android:layout_marginTop="@dimen/buttons_left_right_margin"
+        android:layout_marginBottom="@dimen/buttons_left_right_margin"
+        android:textSize="@dimen/large_text_size"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
