@@ -21,6 +21,7 @@ public class DeckRepository extends Repository<Deck> {
         ContentValues values = new ContentValues(1);
 
         values.put("title", element.getTitle());
+        values.put("strategy_id", element.getStrategyId());
         getDatabase().insert(DatabaseConfiguration.TABLE_DECKS, null, values);
     }
 

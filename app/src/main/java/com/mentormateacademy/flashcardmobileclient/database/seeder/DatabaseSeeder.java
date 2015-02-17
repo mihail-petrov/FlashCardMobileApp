@@ -44,6 +44,7 @@ public class DatabaseSeeder extends Application {
 
             String deckTitle = randomGenerator.generateString(5, 15, true);
             deckObject.setTitle(deckTitle);
+            deckObject.setStrategyId(1);
 
             // add new object to the database
             this.databaseRepository.getDeckRepository().create(deckObject);

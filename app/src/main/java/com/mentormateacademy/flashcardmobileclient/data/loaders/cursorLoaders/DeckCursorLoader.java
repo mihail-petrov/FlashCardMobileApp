@@ -6,22 +6,28 @@ import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 
-import com.mentormateacademy.flashcardmobileclient.data.adapters.DeckAdapter;
+import com.mentormateacademy.flashcardmobileclient.data.adapters.DeckCursorAdapter;
 import com.mentormateacademy.flashcardmobileclient.data.loaders.cursorProviders.DeckCursorProvider;
 
 public class DeckCursorLoader implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private DeckCursorProvider cursorProvider;
 
-    private DeckAdapter deckCursorAdapter;
+    private DeckCursorAdapter deckCursorAdapter;
 
-    public DeckCursorLoader(Context context, DeckAdapter deckAdapter) {
+    public DeckCursorLoader(Context context) {
 
         // load cursor Adapter
-        this.deckCursorAdapter = deckAdapter;
+        //this.deckCursorAdapter = deckAdapter;
+        this.deckCursorAdapter = new DeckCursorAdapter(context, null);
 
         // load cursor Provider
+        //this.cursorProvider = cursorProvider;
         this.cursorProvider = new DeckCursorProvider(context);
+    }
+
+    public DeckCursorAdapter getCursorAdapter() {
+        return this.deckCursorAdapter;
     }
 
     @Override
