@@ -9,16 +9,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/username_hint"
-        android:layout_marginTop="50dp"
-        android:textSize="25sp"
+        android:layout_marginTop="@dimen/log_in_edit_text_top_margin"
+        android:textSize="@dimen/log_in_sign_up_large_text_size"
         android:id="@+id/usernameLogInEditText" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="@dimen/log_in_edit_text_top_margin"
         android:inputType="textPassword"
-        android:textSize="25sp"
+        android:textSize="@dimen/log_in_sign_up_large_text_size"
         android:hint="@string/password_hint"
         android:id="@+id/passwordLogInEditText"
         android:layout_gravity="center_horizontal" />
@@ -26,40 +26,44 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="75dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginBottom="25dp"
-        android:textSize="25sp"
+        android:layout_marginTop="@dimen/log_in_button_log_in_top_margin"
+        android:layout_marginRight="@dimen/log_in_sign_up_buttons_left_right_margin"
+        android:layout_marginLeft="@dimen/log_in_sign_up_buttons_left_right_margin"
+        android:layout_marginBottom="@dimen/log_in_button_log_in_bottom_margin"
+        android:textSize="@dimen/log_in_sign_up_large_text_size"
         android:text="@string/log_in_button_text"
         android:id="@+id/logInButton"
         android:layout_gravity="center_horizontal" />
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:id="@+id/logInFragmentRelativeLayout">
+        android:layout_marginLeft="@dimen/log_in_sign_up_buttons_left_right_margin"
+        android:layout_marginRight="@dimen/log_in_sign_up_buttons_left_right_margin"
+        android:orientation="horizontal">
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/forgot_password_button_text"
+            android:layout_weight="1"
             android:id="@+id/forgotPasswordButton"
             android:layout_gravity="left"
-            android:textSize="15sp"
+            android:layout_marginRight="@dimen/log_in_sign_up_buttons_left_right_margin"
+            android:textSize="@dimen/log_in_sign_up_small_text_size"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true" />
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="@dimen/log_in_sign_up_buttons_left_right_margin"
             android:text="@string/sign_up_button_text"
             android:id="@+id/signUpButton"
-            android:textSize="15sp"
+            android:textSize="@dimen/log_in_sign_up_small_text_size"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true" />
-    </RelativeLayout>
+    </LinearLayout>
 
 </LinearLayout>
