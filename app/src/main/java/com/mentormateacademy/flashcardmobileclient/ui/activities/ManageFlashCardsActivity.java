@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,12 +16,17 @@ public class ManageFlashCardsActivity extends ActionBarActivity {
 
     public static final String SELECTED_DECK_NAME = "deckName";
 
+    private Toolbar toolbar;
+
     private static boolean fragmentAdded = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_flash_cards);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         if(!fragmentAdded) {
             DeckFragment deckFragment = new DeckFragment();

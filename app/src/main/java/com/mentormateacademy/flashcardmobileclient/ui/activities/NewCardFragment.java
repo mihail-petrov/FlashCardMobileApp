@@ -27,6 +27,7 @@ public class NewCardFragment extends Fragment{
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        getActivity().setTitle(getActivity().getString(R.string.add_new_card_title));
         initializeViewsAndSetListeners();
 
     }
