@@ -17,10 +17,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".ui.activities.DeckListActivity"></activity>
+
         <activity
             android:name=".ui.activities.NewDeckActivity"
             android:label="NewDeck"></activity>
+
         <activity
             android:name=".ui.activities.CardListActivity"
             android:label="CardList"></activity>
