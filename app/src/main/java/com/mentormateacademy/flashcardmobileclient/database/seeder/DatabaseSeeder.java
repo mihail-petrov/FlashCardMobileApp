@@ -58,13 +58,16 @@ public class DatabaseSeeder extends Application {
 
                 long deckCategory = i;
 
-                String cardFrontTitle = randomGenerator.generateString(5, 10, false);
+                //String cardFrontTitle = randomGenerator.generateString(5, 10, false);
+                String cardFrontTitle = "Front";
                 String cardFrontContent = randomGenerator.generateString(5, 20, true);
 
-                String cardBackTitle = randomGenerator.generateString(5, 10, false);
+                //String cardBackTitle = randomGenerator.generateString(5, 10, false);
+                String cardBackTitle = "Back";
                 String cardBackContent = randomGenerator.generateString(5, 20, true);
 
-                String cardExtraTitle = randomGenerator.generateString(5, 10, false);
+                //String cardExtraTitle = randomGenerator.generateString(5, 10, false);
+                String cardExtraTitle = "Extra";
                 String cardExtraContent = randomGenerator.generateString(5, 20, true);
 
                 // populate object

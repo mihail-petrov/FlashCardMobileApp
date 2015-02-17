@@ -1,4 +1,4 @@
-package com.mentormateacademy.flashcardmobileclient.component;
+package com.mentormateacademy.flashcardmobileclient.component.androidComponent;
 
 import android.content.Context;
 import android.graphics.Typeface;
@@ -56,7 +56,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
     }
 
     /**
-     * Set the custom {@link com.mentormateacademy.flashcardmobileclient.component.SlidingTabLayout.TabColorizer} to be used.
+     * Set the custom {@link SlidingTabLayout.TabColorizer} to be used.
      * <p/>
      * If you only require simple custmisation then you can use
      * {@link #setSelectedIndicatorColors(int...)} to achieve
@@ -79,7 +79,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
     }
 
     /**
-     * Set the {@link android.support.v4.view.ViewPager.OnPageChangeListener}. When using {@link com.mentormateacademy.flashcardmobileclient.component.SlidingTabLayout} you are
+     * Set the {@link android.support.v4.view.ViewPager.OnPageChangeListener}. When using {@link SlidingTabLayout} you are
      * required to set any {@link android.support.v4.view.ViewPager.OnPageChangeListener} through this method. This is so
      * that the layout can update it's scroll position correctly.
      *
@@ -215,7 +215,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
 
     /**
      * Allows complete control over the colors drawn in the tab layout. Set with
-     * {@link #setCustomTabColorizer(com.mentormateacademy.flashcardmobileclient.component.SlidingTabLayout.TabColorizer)}.
+     * {@link #setCustomTabColorizer(SlidingTabLayout.TabColorizer)}.
      */
     public interface TabColorizer {
 

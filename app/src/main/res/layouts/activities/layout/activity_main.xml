@@ -13,7 +13,7 @@
         android:background="#fafafa" />
 
     <!---->
-    <com.mentormateacademy.flashcardmobileclient.component.SlidingTabLayout
+    <com.mentormateacademy.flashcardmobileclient.component.androidComponent.SlidingTabLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="60dp"

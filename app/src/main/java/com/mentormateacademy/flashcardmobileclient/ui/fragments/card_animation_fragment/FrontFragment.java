@@ -41,13 +41,13 @@ public class FrontFragment extends Fragment {
         // TODO: Remove clean context
         View fragmentView = inflater.inflate(R.layout.front_layout, container, false);
 
-        TextView cardTitle = (TextView) fragmentView.findViewById(R.id.cardTitle);
+//        TextView cardTitle = (TextView) fragmentView.findViewById(R.id.cardTitle);
         TextView cardContent = (TextView) fragmentView.findViewById(R.id.cardContent);
 
         //
         if (arguments != null) {
 
-            cardTitle.setText(getArguments().getString("card_title"));
+//            cardTitle.setText(getArguments().getString("card_title"));
             cardContent.setText(getArguments().getString("card_content"));
         }
         return fragmentView;

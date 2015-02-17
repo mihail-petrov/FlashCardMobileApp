@@ -6,7 +6,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.mentormateacademy.flashcardmobileclient.R;
-import com.mentormateacademy.flashcardmobileclient.component.SlidingTabLayout;
+import com.mentormateacademy.flashcardmobileclient.component.androidComponent.SlidingTabLayout;
 import com.mentormateacademy.flashcardmobileclient.data.adapters.CardPagerAdapter;
 
 public class MainActivity extends ActionBarActivity {

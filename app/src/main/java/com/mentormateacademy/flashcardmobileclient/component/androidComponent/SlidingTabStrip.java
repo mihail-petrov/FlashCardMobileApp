@@ -1,4 +1,4 @@
-package com.mentormateacademy.flashcardmobileclient.component;
+package com.mentormateacademy.flashcardmobileclient.component.androidComponent;
 
 import android.content.Context;
 import android.graphics.Canvas;

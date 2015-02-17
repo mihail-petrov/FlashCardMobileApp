@@ -156,6 +156,6 @@ public class CardRepository extends Repository<Card> {
 
     @Override
     public void deleteAll() {
-
+        getDatabase().delete(DatabaseConfiguration.TABLE_CARDS, null, null);
     }
 }

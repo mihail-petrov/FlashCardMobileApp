@@ -65,6 +65,6 @@ public class DeckRepository extends Repository<Deck> {
 
     @Override
     public void deleteAll() {
-
+        getDatabase().delete(DatabaseConfiguration.TABLE_DECKS, null, null);
     }
 }

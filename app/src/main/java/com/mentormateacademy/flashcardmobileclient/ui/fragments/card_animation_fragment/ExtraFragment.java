@@ -13,19 +13,21 @@ import android.widget.TextView;
 import com.mentormateacademy.flashcardmobileclient.R;
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-public class BackFragment extends Fragment {
+public class ExtraFragment extends Fragment {
 
-    public BackFragment() {
+
+    public ExtraFragment() {
+
     }
 
-    public static BackFragment newInstance(String cardTitle, String cardContent) {
+    public static ExtraFragment newInstance(String cardTitle, String cardContent) {
 
         Bundle arguments = new Bundle();
         arguments.putString("card_title", cardTitle);
         arguments.putString("card_content", cardContent);
 
         // create fragment
-        BackFragment fragment = new BackFragment();
+        ExtraFragment fragment = new ExtraFragment();
         fragment.setArguments(arguments);
 
         return fragment;
@@ -37,7 +39,7 @@ public class BackFragment extends Fragment {
         Bundle arguments = getArguments();
 
         // TODO: Remove clean context
-        View fragmentView = inflater.inflate(R.layout.back_layout, container, false);
+        View fragmentView = inflater.inflate(R.layout.extra_layout, container, false);
 
 //        TextView cardTitle = (TextView) fragmentView.findViewById(R.id.cardTitle);
         TextView cardContent = (TextView) fragmentView.findViewById(R.id.cardContent);
