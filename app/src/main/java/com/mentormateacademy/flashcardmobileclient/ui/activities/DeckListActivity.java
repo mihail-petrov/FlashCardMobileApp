@@ -25,7 +25,6 @@ public class DeckListActivity extends ActionBarActivity {
 
         getSupportActionBar().setTitle("My Decks");
 
-
         //
         getSupportFragmentManager()
                 .beginTransaction()

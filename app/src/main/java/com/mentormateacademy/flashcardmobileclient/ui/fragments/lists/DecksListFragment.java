@@ -14,7 +14,7 @@ import com.mentormateacademy.flashcardmobileclient.R;
 import com.mentormateacademy.flashcardmobileclient.data.adapters.DeckCursorAdapter;
 import com.mentormateacademy.flashcardmobileclient.data.loaders.BaseCursorLoader;
 import com.mentormateacademy.flashcardmobileclient.data.loaders.cursorProviders.DeckCursorProvider;
-import com.mentormateacademy.flashcardmobileclient.ui.activities.ShowCardsFromDeckActivity;
+import com.mentormateacademy.flashcardmobileclient.ui.activities.CardListActivity;
 
 public class DecksListFragment extends Fragment {
 
@@ -43,14 +43,17 @@ public class DecksListFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 // list card view
-//                Intent openCardListActivity = new Intent(getActivity(), CardListActivity.class);
-//                openCardListActivity.putExtra("deck_id", id);
-//                startActivity(openCardListActivity);
+                Intent openCardListActivity = new Intent(getActivity(), CardListActivity.class);
+                openCardListActivity.putExtra("DECK_ID", id);
+                openCardListActivity.putExtra("STRATEGY_ID", id);
+                startActivity(openCardListActivity);
+
 
                 // start crd slide show
-                Intent openCardListActivity = new Intent(getActivity(), ShowCardsFromDeckActivity.class);
-                openCardListActivity.putExtra("deck_id", id);
-                startActivity(openCardListActivity);
+//                Intent openCardListActivity = new Intent(getActivity(), ShowCardsFromDeckActivity.class);
+//                openCardListActivity.putExtra("DECK_ID", id);
+//                openCardListActivity.putExtra("STRATEGY_ID", id);
+//                startActivity(openCardListActivity);
             }
         });
 

@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.mentormateacademy.flashcardmobileclient.R;
+import com.mentormateacademy.flashcardmobileclient.configurations.StrategyConfiguration;
 import com.mentormateacademy.flashcardmobileclient.database.helper.DatabaseRepository;
 import com.mentormateacademy.flashcardmobileclient.models.Card;
 import com.mentormateacademy.flashcardmobileclient.ui.fragments.card_animation_fragment.BackFragment;
@@ -35,6 +36,7 @@ public class ShowCardsFromDeckActivity extends ActionBarActivity {
     // UI control variables
     private boolean isFront = true;
     private int cardIndex   = 1;
+    private long strategyId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,13 +49,17 @@ public class ShowCardsFromDeckActivity extends ActionBarActivity {
         getSupportActionBar().setTitle("TODO: Deck Name ");
 
         // get all deck elements
-        long id = getIntent().getLongExtra("DECK_ID", 0);
-        cards = DatabaseRepository.getRepository(this).getCardRepository().readAllBaseOnDeckIdObject(id);
+        long deckId     = getIntent().getLongExtra("DECK_ID", 0);
+        strategyId      = getIntent().getLongExtra("STRATEGY_ID", 0);
 
+        // Init card array list
+        Bundle arguments = new Bundle();
+        arguments.putString("deck_id", String.valueOf(deckId));
+        cards = DatabaseRepository.getRepository(this).getCardRepository().readBy(arguments);
+
+        // initialize first fragment view
         initView();
     }
-
-
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public void initView() {
@@ -136,14 +142,43 @@ public class ShowCardsFromDeckActivity extends ActionBarActivity {
     // ===================================================
 
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_card_show, menu);
-        myMenu = menu;
 
-        if (isFront) {
-            myMenu.findItem(R.id.flip).setTitle("Back");
-        } else {
-            myMenu.findItem(R.id.flip).setTitle("Front");
+        //
+        //
+        if(strategyId == StrategyConfiguration.ORDER_PROGRESS) {
+
+            getMenuInflater().inflate(R.menu.menu_card_show, menu);
+            myMenu = menu;
+
+            if (isFront) {
+                myMenu.findItem(R.id.flip).setTitle("Back");
+            } else {
+                myMenu.findItem(R.id.flip).setTitle("Front");
+            }
+
         }
+
+        //
+        //
+        if(strategyId == StrategyConfiguration.SHUFFLE_ORDER) {
+
+            getMenuInflater().inflate(R.menu.menu_card_show, menu);
+            myMenu = menu;
+
+            if (isFront) {
+                myMenu.findItem(R.id.flip).setTitle("Back");
+            } else {
+                myMenu.findItem(R.id.flip).setTitle("Front");
+            }
+
+        }
+
+        //
+        //
+        if(strategyId == StrategyConfiguration.SPACED_REPETITION) {
+            getMenuInflater().inflate(R.menu.menu_strategy_spaced, menu);
+        }
+
 
         return true;
     }

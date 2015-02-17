@@ -1,6 +1,6 @@
 package com.mentormateacademy.flashcardmobileclient.configurations;
 
-public class DatabaseConfiguration {
+public interface DatabaseConfiguration {
 
     // @Database: flashcard_db
     // ==================================================
@@ -59,7 +59,4 @@ public class DatabaseConfiguration {
 
     // @Query: delete cards table
     public static final String TABLE_CARDS_DROP_QUERY = "drop table " + TABLE_CARDS;
-
-    private DatabaseConfiguration() {
-    }
 }

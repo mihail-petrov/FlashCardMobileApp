@@ -3,6 +3,7 @@ package com.mentormateacademy.flashcardmobileclient.database.repositories;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.os.Bundle;
 import android.util.Log;
 
 import com.mentormateacademy.flashcardmobileclient.configurations.DatabaseConfiguration;
@@ -15,7 +16,7 @@ import java.util.ArrayList;
 public class CardRepository extends Repository<Card> {
 
     public CardRepository(Context context) {
-        super(context);
+        super(context, DatabaseConfiguration.TABLE_CARDS);
     }
 
     @Override
@@ -34,7 +35,7 @@ public class CardRepository extends Repository<Card> {
 
         getDatabase().insert(DatabaseConfiguration.TABLE_CARDS, null, values);
 
-        Log.d("DB_HELPER", "Insert record in table " + DatabaseConfiguration.TABLE_DECKS);
+        Log.d("DB_HELPER", "Insert record in table " + DatabaseConfiguration.TABLE_CARDS);
     }
 
     @Override
@@ -47,38 +48,7 @@ public class CardRepository extends Repository<Card> {
         Cursor cardCursorPointer = readAllCursor();
         while (cardCursorPointer.moveToNext()) {
 
-            // get all database fields
-            long id = cardCursorPointer.getLong(cardCursorPointer
-                    .getColumnIndex("_id"));
-            long deckId = cardCursorPointer.getLong(cardCursorPointer
-                    .getColumnIndex("deck_id"));
-
-            String frontTitle = cardCursorPointer.getString(cardCursorPointer
-                    .getColumnIndex("front_title"));
-            String frontContent = cardCursorPointer.getString(cardCursorPointer
-                    .getColumnIndex("front_content"));
-
-            String backTitle = cardCursorPointer.getString(cardCursorPointer
-                    .getColumnIndex("back_title"));
-            String backContent = cardCursorPointer.getString(cardCursorPointer
-                    .getColumnIndex("back_content"));
-
-            String extraTitle = cardCursorPointer.getString(cardCursorPointer
-                    .getColumnIndex("extra_title"));
-            String extraContent = cardCursorPointer.getString(cardCursorPointer
-                    .getColumnIndex("extra_content"));
-
-
-            Card cardObject = new Card();
-            cardObject.setId(id);
-            cardObject.setDeckId(deckId);
-            cardObject.setFrontTitle(frontTitle);
-            cardObject.setFrontContent(frontContent);
-            cardObject.setBackTitle(backTitle);
-            cardObject.setBackContent(backContent);
-            cardObject.setExtraTitle(extraTitle);
-            cardObject.setExtraContent(extraContent);
-
+            Card cardObject = getCard(cardCursorPointer);
             cardArrayList.add(cardObject);
         }
 
@@ -90,59 +60,53 @@ public class CardRepository extends Repository<Card> {
         return getDatabase().query(DatabaseConfiguration.TABLE_CARDS, null, null, null, null, null, null);
     }
 
-    public Cursor readAllBaseOnDeckId(long deck_id) {
-        return getDatabase().query(DatabaseConfiguration.TABLE_CARDS, null, "deck_id=" + deck_id, null, null, null, null);
-    }
-
-    public ArrayList<Card>  readAllBaseOnDeckIdObject(long deck_id) {
+    public ArrayList<Card> readBy(Bundle arguments){
 
         // create empty ArrayList
         ArrayList<Card> cardArrayList = new ArrayList<>();
 
-        // get cursor
-        Cursor cardCursorPointer = readAllBaseOnDeckId(deck_id);
-
+        Cursor cardCursorPointer = readByCursor(arguments);
         while (cardCursorPointer.moveToNext()) {
 
-            // get all database fields
-            long id = cardCursorPointer.getLong(cardCursorPointer
-                    .getColumnIndex("_id"));
-            long deckId = cardCursorPointer.getLong(cardCursorPointer
-                    .getColumnIndex("deck_id"));
-
-            String frontTitle = cardCursorPointer.getString(cardCursorPointer
-                    .getColumnIndex("front_title"));
-            String frontContent = cardCursorPointer.getString(cardCursorPointer
-                    .getColumnIndex("front_content"));
-
-            String backTitle = cardCursorPointer.getString(cardCursorPointer
-                    .getColumnIndex("back_title"));
-            String backContent = cardCursorPointer.getString(cardCursorPointer
-                    .getColumnIndex("back_content"));
-
-            String extraTitle = cardCursorPointer.getString(cardCursorPointer
-                    .getColumnIndex("extra_title"));
-            String extraContent = cardCursorPointer.getString(cardCursorPointer
-                    .getColumnIndex("extra_content"));
-
-
-            Card cardObject = new Card();
-            cardObject.setId(id);
-            cardObject.setDeckId(deckId);
-            cardObject.setFrontTitle(frontTitle);
-            cardObject.setFrontContent(frontContent);
-            cardObject.setBackTitle(backTitle);
-            cardObject.setBackContent(backContent);
-            cardObject.setExtraTitle(extraTitle);
-            cardObject.setExtraContent(extraContent);
-
+            Card cardObject = getCard(cardCursorPointer);
             cardArrayList.add(cardObject);
         }
 
         return cardArrayList;
-
     }
 
+
+//    public Cursor readByCursor(Bundle arguments) {
+//
+//        Set<String> tableColumns  = arguments.keySet();
+//        Iterator<String> iterator = tableColumns.iterator();
+//
+//        ArrayList<String> where = new ArrayList<>();
+//        StringBuilder builder   = new StringBuilder();
+//
+//        while(iterator.hasNext()) {
+//            String element = iterator.next();
+//
+//            if(iterator.hasNext()) {
+//                builder.append(element).append("=? AND ");
+//            }
+//            else {
+//                builder.append(element).append("=?");
+//            }
+//
+//            where.add(arguments.getString(element));
+//            Log.d("DATA_DATA_DATA", arguments.getString(element));
+//        }
+//
+//        // database query
+//        String databaseQuery = builder.toString();
+//
+//        // where arguments array
+//        String[] whereArguments = where.toArray(new String[where.size()]);
+//
+//        return getDatabase().query(DatabaseConfiguration.TABLE_CARDS, null,
+//                databaseQuery, whereArguments, null, null, null);
+//    }
 
     @Override
     public void update(Card element) {
@@ -158,4 +122,37 @@ public class CardRepository extends Repository<Card> {
     public void deleteAll() {
         getDatabase().delete(DatabaseConfiguration.TABLE_CARDS, null, null);
     }
+
+    // CardRepository Utility Methods
+    // =====================================
+
+    public Card getCard(Cursor cursorPointer){
+
+        // get all database fields
+        long id     = cursorPointer.getLong(cursorPointer.getColumnIndex("_id"));
+        long deckId = cursorPointer.getLong(cursorPointer.getColumnIndex("deck_id"));
+
+        String frontTitle   = cursorPointer.getString(cursorPointer.getColumnIndex("front_title"));
+        String frontContent = cursorPointer.getString(cursorPointer.getColumnIndex("front_content"));
+
+        String backTitle   = cursorPointer.getString(cursorPointer.getColumnIndex("back_title"));
+        String backContent = cursorPointer.getString(cursorPointer.getColumnIndex("back_content"));
+
+        String extraTitle   = cursorPointer.getString(cursorPointer.getColumnIndex("extra_title"));
+        String extraContent = cursorPointer.getString(cursorPointer.getColumnIndex("extra_content"));
+
+
+        Card cardObject = new Card();
+        cardObject.setId(id);
+        cardObject.setDeckId(deckId);
+        cardObject.setFrontTitle(frontTitle);
+        cardObject.setFrontContent(frontContent);
+        cardObject.setBackTitle(backTitle);
+        cardObject.setBackContent(backContent);
+        cardObject.setExtraTitle(extraTitle);
+        cardObject.setExtraContent(extraContent);
+
+        return cardObject;
+    }
+
 }

@@ -19,10 +19,11 @@ public class CardListFragment extends Fragment {
 
     }
 
-    public static CardListFragment newInstance(long deckId) {
+    public static CardListFragment newInstance(long deckId, long strategyId) {
 
         Bundle arguments = new Bundle();
         arguments.putLong("DECK_ID", deckId);
+        arguments.putLong("STRATEGY_ID", strategyId);
 
         CardListFragment cardListFragment = new CardListFragment();
         cardListFragment.setArguments(arguments);

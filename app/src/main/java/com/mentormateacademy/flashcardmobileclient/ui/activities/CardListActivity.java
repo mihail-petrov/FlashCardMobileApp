@@ -21,19 +21,17 @@ public class CardListActivity extends ActionBarActivity {
         setSupportActionBar(topToolbar);
         getSupportActionBar().setTitle("TODO: Deck Name ");
 
-
         //
-        long deck_id = getIntent().getLongExtra("deck_id", 0);
+        long deckId = getIntent().getLongExtra("DECK_ID", 0);
+        long strategyId = getIntent().getLongExtra("STRATEGY_ID", 0);
 
         // create listFragment
-        CardListFragment cardListFragment = CardListFragment.newInstance(deck_id);
+        CardListFragment cardListFragment = CardListFragment.newInstance(deckId, strategyId);
 
-
+        //
         getSupportFragmentManager()
                 .beginTransaction()
                 .add(R.id.fragmentContainer, cardListFragment)
                 .commit();
-
-
     }
 }
