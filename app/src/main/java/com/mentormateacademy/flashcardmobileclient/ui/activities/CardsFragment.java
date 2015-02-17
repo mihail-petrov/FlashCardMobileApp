@@ -82,9 +82,9 @@ public class CardsFragment extends Fragment{
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.crete_new_menu_item:
-                NewCardFragment newCardFragment = new NewCardFragment();
+                NewCardViewPagerFragment newCardViewPagerFragment = new NewCardViewPagerFragment();
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.replace(R.id.container, newCardFragment);
+                ft.replace(R.id.container, newCardViewPagerFragment);
                 ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                 ft.addToBackStack(null);
                 ft.commit();

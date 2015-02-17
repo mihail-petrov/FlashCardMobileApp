@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_below="@+id/toolbar"
+    android:id="@+id/scrollView">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/textView2"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:hint="@string/card_name_hint"
+            android:id="@+id/cardNameEditText2"
+            android:layout_marginTop="50dp"
+            android:layout_below="@+id/textView2" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minLines="7"
+            android:hint="@string/note_content_hint"
+            android:layout_marginTop="50dp"
+            android:gravity="center"
+            android:scrollbars="vertical"
+            android:id="@+id/noteContentEditText2"
+            android:layout_below="@+id/cardNameEditText2" />
+    </RelativeLayout>
+</ScrollView>

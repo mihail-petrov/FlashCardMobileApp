@@ -11,30 +11,66 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.mentormateacademy.flashcardmobileclient.R;
 
 public class NewCardFragment extends Fragment{
 
     private EditText editTextCardName, editTextNoteContent;
+    private TextView textView;
+
+    private boolean editTextCardNameHasText, editTextNoteContentHasText;
+    private int index;
+
+    private static final String SAVED_INDEX = "savedIndex";
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_new_card, container, false);
+        index = this.getArguments().getInt(ViewPagerAdapter.INDEX_KEY);
+
+        if(savedInstanceState != null){
+            index = savedInstanceState.getInt(SAVED_INDEX);
+        }
+        String layoutId = "fragment_new_card_" + index;
+        int id = getActivity().getResources().getIdentifier(layoutId, "layout", getActivity().getApplicationContext().getPackageName());
+        return inflater.inflate(id, container, false);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        if(savedInstanceState != null){
+            index = savedInstanceState.getInt(SAVED_INDEX);
+        }
 
-        getActivity().setTitle(getActivity().getString(R.string.add_new_card_title));
-        initializeViewsAndSetListeners();
+        editTextCardNameHasText = false;
+        editTextNoteContentHasText = false;
+
+        try {
+            initializeViewsAndSetListeners();
+        }catch (NullPointerException e){
+            e.printStackTrace();
+        }
 
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putInt(SAVED_INDEX, index);
+        super.onSaveInstanceState(outState);
+    }
+
     private void initializeViewsAndSetListeners() {
-        editTextCardName = (EditText) getActivity().findViewById(R.id.cardNameEditText);
-        editTextNoteContent = (EditText) getActivity().findViewById(R.id.noteContentEditText);
+        int idTextView = getActivity().getResources().getIdentifier("textView"+index, "id", getActivity().getApplicationContext().getPackageName());
+        textView = (TextView) getActivity().findViewById(idTextView);
+        textView.setText("Side " + index);
+
+        int idCardName = getActivity().getResources().getIdentifier("cardNameEditText"+index, "id", getActivity().getApplicationContext().getPackageName());
+        editTextCardName = (EditText) getActivity().findViewById(idCardName);
+
+        int idNoteContent = getActivity().getResources().getIdentifier("noteContentEditText"+index, "id", getActivity().getApplicationContext().getPackageName());
+        editTextNoteContent = (EditText) getActivity().findViewById(idNoteContent);
 
         editTextNoteContent.addTextChangedListener(new TextWatcher() {
             @Override
@@ -45,11 +81,41 @@ public class NewCardFragment extends Fragment{
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 //Handle hint location in the edit text
+                //Check if the editText is empty
                 if(TextUtils.isEmpty(s)){
                     editTextNoteContent.setGravity(Gravity.CENTER);
+                    editTextNoteContentHasText = false;
                 }else {
                     editTextNoteContent.setGravity(Gravity.NO_GRAVITY);
+                    editTextNoteContentHasText = true;
                 }
+                NewCardViewPagerFragment newCardViewPagerFragment = (NewCardViewPagerFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.container);
+                newCardViewPagerFragment.setEditTextsHaveText(index-1,editTextCardNameHasText && editTextNoteContentHasText);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        editTextCardName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                //Check if the editText is empty
+                if(TextUtils.isEmpty(s)){
+                    editTextCardNameHasText = false;
+                }else {
+                    editTextCardNameHasText = true;
+                }
+
+                NewCardViewPagerFragment newCardViewPagerFragment = (NewCardViewPagerFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.container);
+                newCardViewPagerFragment.setEditTextsHaveText(index - 1,editTextCardNameHasText && editTextNoteContentHasText);
             }
 
             @Override

@@ -22,5 +22,7 @@
     <string name="card_name_hint">Card Name</string>
     <string name="note_content_hint">Note Content</string>
     <string name="add_new_card_title">Add New Card</string>
+    <string name="save_card_menu_item_text">save</string>
+    <string name="not_enough_info_toast_text">Not enough info</string>
 
 </resources>

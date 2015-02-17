@@ -84,7 +84,7 @@ public class ManageFlashCardsActivity extends ActionBarActivity {
             startActivity(intent);
             fragmentAdded = false;
             finish();
-        }else {
+        }else{
             super.onBackPressed();
         }
     }

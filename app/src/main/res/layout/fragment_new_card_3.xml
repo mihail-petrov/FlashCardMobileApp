@@ -8,15 +8,22 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/textView3"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
             android:hint="@string/card_name_hint"
-            android:id="@+id/cardNameEditText"
+            android:id="@+id/cardNameEditText3"
             android:layout_marginTop="50dp"
-            android:layout_alignParentTop="true" />
+            android:layout_below="@+id/textView3" />
 
         <EditText
             android:layout_width="match_parent"
@@ -26,7 +33,7 @@
             android:layout_marginTop="50dp"
             android:gravity="center"
             android:scrollbars="vertical"
-            android:id="@+id/noteContentEditText"
-            android:layout_below="@+id/cardNameEditText" />
+            android:id="@+id/noteContentEditText3"
+            android:layout_below="@+id/cardNameEditText3" />
     </RelativeLayout>
 </ScrollView>
