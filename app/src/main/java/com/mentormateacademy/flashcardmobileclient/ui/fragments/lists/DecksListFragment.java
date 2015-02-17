@@ -11,7 +11,9 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.mentormateacademy.flashcardmobileclient.R;
-import com.mentormateacademy.flashcardmobileclient.data.loaders.cursorLoaders.DeckCursorLoader;
+import com.mentormateacademy.flashcardmobileclient.data.adapters.DeckCursorAdapter;
+import com.mentormateacademy.flashcardmobileclient.data.loaders.BaseCursorLoader;
+import com.mentormateacademy.flashcardmobileclient.data.loaders.cursorProviders.DeckCursorProvider;
 import com.mentormateacademy.flashcardmobileclient.ui.activities.CardListActivity;
 
 public class DecksListFragment extends Fragment {
@@ -21,10 +23,16 @@ public class DecksListFragment extends Fragment {
 
         View fragmentView = inflater.inflate(R.layout.fragment_list_deck, container, false);
 
-        // get cursor loader
-        DeckCursorLoader cursorLoader = new DeckCursorLoader(getActivity());
+        // cursor adapter
+        DeckCursorAdapter adapter = new DeckCursorAdapter(getActivity(), null);
 
-        // get list view component
+        // cursor provider
+        DeckCursorProvider cursorProvider = new DeckCursorProvider(getActivity());
+
+        // get cursor loader
+        BaseCursorLoader cursorLoader = new BaseCursorLoader(adapter, cursorProvider);
+
+        // get list view
         ListView deckListView = (ListView) fragmentView.findViewById(R.id.deckListView);
         deckListView.setAdapter(cursorLoader.getCursorAdapter());
 
@@ -40,8 +48,6 @@ public class DecksListFragment extends Fragment {
             }
         });
 
-
-        //
         getLoaderManager().initLoader(0, null, cursorLoader);
 
         return fragmentView;

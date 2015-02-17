@@ -32,7 +32,7 @@ public class CardCursorAdapter extends CursorAdapter {
     public void bindView(View view, Context context, Cursor cursor) {
 
         ViewHolder holder = (ViewHolder) view.getTag();
-        holder.title.setText(cursor.getString(cursor.getColumnIndex("title")));
+        holder.title.setText(cursor.getString(cursor.getColumnIndex("front_title")));
     }
 
     private class ViewHolder {

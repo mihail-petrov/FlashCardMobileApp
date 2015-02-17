@@ -20,10 +20,14 @@
         <activity android:name=".ui.activities.DeckListActivity"></activity>
         <activity
             android:name=".ui.activities.NewDeckActivity"
-            android:label="@string/title_activity_new_deck"></activity>
+            android:label="NewDeck"></activity>
         <activity
             android:name=".ui.activities.CardListActivity"
-            android:label="@string/title_activity_card_list"></activity>
+            android:label="CardList"></activity>
+
+        <activity android:name=".ui.activities.ShowCardsFromDeckActivity">
+
+        </activity>
     </application>
 
 </manifest>

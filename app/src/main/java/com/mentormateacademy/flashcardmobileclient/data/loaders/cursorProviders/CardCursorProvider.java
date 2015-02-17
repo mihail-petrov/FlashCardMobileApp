@@ -3,11 +3,11 @@ package com.mentormateacademy.flashcardmobileclient.data.loaders.cursorProviders
 import android.content.Context;
 import android.database.Cursor;
 
-import com.mentormateacademy.flashcardmobileclient.data.loaders.BaseCursorLoader;
+import com.mentormateacademy.flashcardmobileclient.data.loaders.BaseCursorProvider;
 import com.mentormateacademy.flashcardmobileclient.database.helper.DatabaseRepository;
 import com.mentormateacademy.flashcardmobileclient.database.repositories.CardRepository;
 
-public class CardCursorProvider extends BaseCursorLoader {
+public class CardCursorProvider extends BaseCursorProvider {
 
     private CardRepository cardRepository;
 

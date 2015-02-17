@@ -1,77 +1,38 @@
 package com.mentormateacademy.flashcardmobileclient.data.loaders;
 
-import android.content.Context;
 import android.database.Cursor;
-import android.support.v4.content.AsyncTaskLoader;
+import android.os.Bundle;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
+import android.support.v4.widget.CursorAdapter;
 
-public abstract class BaseCursorLoader extends AsyncTaskLoader<Cursor> {
 
-    private Cursor mCursor;
+public class BaseCursorLoader implements LoaderManager.LoaderCallbacks<Cursor> {
 
-    public BaseCursorLoader(Context context) {
-        super(context);
+    private CursorAdapter cursorAdapter;
+    private BaseCursorProvider cursorProvider;
+
+    public BaseCursorLoader(CursorAdapter cursorAdapter, BaseCursorProvider cursorProvider){
+        this.cursorAdapter = cursorAdapter;
+        this.cursorProvider = cursorProvider;
     }
 
     @Override
-    public abstract Cursor loadInBackground();
-
-    @Override
-    public void deliverResult(Cursor cursor) {
-
-        // check if cursor is reset
-        boolean isReset = isReset();
-
-        if (isReset) {
-            if (cursor != null) {
-                cursor.close();
-            }
-            return;
-        }
-
-        Cursor oldCursor = mCursor;
-        mCursor = cursor;
-
-        // check if cursor is started
-        if (isStarted()) {
-            super.deliverResult(cursor);
-        }
-
-        // start new cursor
-        if (oldCursor != null && oldCursor != cursor && !oldCursor.isClosed()) {
-            oldCursor.close();
-        }
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        return this.cursorProvider;
     }
 
     @Override
-    protected void onStartLoading() {
-        if (mCursor != null) {
-            deliverResult(mCursor);
-        }
-        if (takeContentChanged() || mCursor == null) {
-            forceLoad();
-        }
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        this.cursorAdapter.swapCursor(data);
     }
 
     @Override
-    protected void onStopLoading() {
-        cancelLoad();
+    public void onLoaderReset(Loader<Cursor> loader) {
+        this.cursorAdapter.swapCursor(null);
     }
 
-    @Override
-    public void onCanceled(Cursor cursor) {
-        if (cursor != null && !cursor.isClosed()) {
-            cursor.close();
-        }
-    }
-
-    @Override
-    protected void onReset() {
-        super.onReset();
-        onStopLoading();
-
-        if (mCursor != null && !mCursor.isClosed()) {
-            mCursor.close();
-        }
-        mCursor = null;
+    public CursorAdapter getCursorAdapter(){
+        return cursorAdapter;
     }
 }

@@ -18,11 +18,9 @@ public class DeckCursorLoader implements LoaderManager.LoaderCallbacks<Cursor> {
     public DeckCursorLoader(Context context) {
 
         // load cursor Adapter
-        //this.deckCursorAdapter = deckAdapter;
         this.deckCursorAdapter = new DeckCursorAdapter(context, null);
 
         // load cursor Provider
-        //this.cursorProvider = cursorProvider;
         this.cursorProvider = new DeckCursorProvider(context);
     }
 
