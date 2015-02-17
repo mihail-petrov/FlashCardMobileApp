@@ -94,6 +94,56 @@ public class CardRepository extends Repository<Card> {
         return getDatabase().query(DatabaseConfiguration.TABLE_CARDS, null, "deck_id=" + deck_id, null, null, null, null);
     }
 
+    public ArrayList<Card>  readAllBaseOnDeckIdObject(long deck_id) {
+
+        // create empty ArrayList
+        ArrayList<Card> cardArrayList = new ArrayList<>();
+
+        // get cursor
+        Cursor cardCursorPointer = readAllBaseOnDeckId(deck_id);
+
+        while (cardCursorPointer.moveToNext()) {
+
+            // get all database fields
+            long id = cardCursorPointer.getLong(cardCursorPointer
+                    .getColumnIndex("_id"));
+            long deckId = cardCursorPointer.getLong(cardCursorPointer
+                    .getColumnIndex("deck_id"));
+
+            String frontTitle = cardCursorPointer.getString(cardCursorPointer
+                    .getColumnIndex("front_title"));
+            String frontContent = cardCursorPointer.getString(cardCursorPointer
+                    .getColumnIndex("front_content"));
+
+            String backTitle = cardCursorPointer.getString(cardCursorPointer
+                    .getColumnIndex("back_title"));
+            String backContent = cardCursorPointer.getString(cardCursorPointer
+                    .getColumnIndex("back_content"));
+
+            String extraTitle = cardCursorPointer.getString(cardCursorPointer
+                    .getColumnIndex("extra_title"));
+            String extraContent = cardCursorPointer.getString(cardCursorPointer
+                    .getColumnIndex("extra_content"));
+
+
+            Card cardObject = new Card();
+            cardObject.setId(id);
+            cardObject.setDeckId(deckId);
+            cardObject.setFrontTitle(frontTitle);
+            cardObject.setFrontContent(frontContent);
+            cardObject.setBackTitle(backTitle);
+            cardObject.setBackContent(backContent);
+            cardObject.setExtraTitle(extraTitle);
+            cardObject.setExtraContent(extraContent);
+
+            cardArrayList.add(cardObject);
+        }
+
+        return cardArrayList;
+
+    }
+
+
     @Override
     public void update(Card element) {
 
