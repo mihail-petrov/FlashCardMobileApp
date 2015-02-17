@@ -90,6 +90,10 @@ public class CardRepository extends Repository<Card> {
         return getDatabase().query(DatabaseConfiguration.TABLE_CARDS, null, null, null, null, null, null);
     }
 
+    public Cursor readAllBaseOnDeckId(long deck_id) {
+        return getDatabase().query(DatabaseConfiguration.TABLE_CARDS, null, "deck_id=" + deck_id, null, null, null, null);
+    }
+
     @Override
     public void update(Card element) {
 

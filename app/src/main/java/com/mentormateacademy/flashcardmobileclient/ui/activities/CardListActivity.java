@@ -2,39 +2,38 @@ package com.mentormateacademy.flashcardmobileclient.ui.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v7.widget.Toolbar;
 
 import com.mentormateacademy.flashcardmobileclient.R;
+import com.mentormateacademy.flashcardmobileclient.ui.fragments.lists.CardListFragment;
 
 public class CardListActivity extends ActionBarActivity {
+
+    private Toolbar topToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_card_list);
-    }
+        setContentView(R.layout.activity_fragment_view);
+
+        //
+        topToolbar = (Toolbar) findViewById(R.id.topToolbar);
+        setSupportActionBar(topToolbar);
+        getSupportActionBar().setTitle("TODO: Deck Name ");
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_card_list, menu);
-        return true;
-    }
+        //
+        long deck_id = getIntent().getLongExtra("deck_id", 0);
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        // create listFragment
+        CardListFragment cardListFragment = CardListFragment.newInstance(deck_id);
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
 
-        return super.onOptionsItemSelected(item);
+        getSupportFragmentManager()
+                .beginTransaction()
+                .add(R.id.fragmentContainer, cardListFragment)
+                .commit();
+
+
     }
 }
