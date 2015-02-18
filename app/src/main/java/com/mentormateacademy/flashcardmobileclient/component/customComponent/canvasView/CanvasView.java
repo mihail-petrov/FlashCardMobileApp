@@ -9,84 +9,112 @@ import android.view.View;
 
 public class CanvasView extends View {
 
-    public CanvasView(Context context) {
-        super(context);
-    }
+    private int canvasCenterX;
+    private int canvasCenterY;
 
+    private int objectPadding;
+
+    // number elements
+    private int inputNumber;
+    private int maxNumber;
+
+    private boolean includeMax;
+
+    public CanvasView(Context context, int inputNumber, int maxNumber, boolean includeMax) {
+        super(context);
+
+        this.inputNumber = inputNumber;
+        this.maxNumber   = maxNumber;
+
+        this.includeMax = includeMax;
+    }
 
     @Override
     protected void onDraw(Canvas canvas) {
 
-        // measure canvas
-        // ==================================
-        int canvasWidth  = canvas.getWidth();
-        int canvasHeight = canvas.getHeight();
+        // measure canvas screen
+        initCanvasScreen(canvas);
 
-        int planeCenterX =  (canvasWidth / 2);
-        int planeCenterY = (canvasHeight / 2);
-
-        int objectPadding = 100;
-
-        int left   = planeCenterX - objectPadding;
-        int top    = planeCenterY - objectPadding;
-        int right  = planeCenterX + objectPadding;
-        int bottom = planeCenterY + objectPadding;
+        // calculate bar size
+        int arcSize = (360 / this.maxNumber);
+        int maxSize = (this.inputNumber * arcSize);
 
         // Base Arc Circle
-        // ==================================
+        drawArc(canvas, "#e7e8e9", 360);
+
+        // Pointer Arc Circle
+        drawArc(canvas, "#ff9000", maxSize);
+
+        String result = (this.includeMax) ?
+                (this.inputNumber + "/" + this.maxNumber)  : String.valueOf(this.inputNumber);
+
+        // Canvas Text
+        drawText(canvas, result);
+    }
+
+    /**
+     *
+     * @param canvas
+     */
+    public void initCanvasScreen(Canvas canvas){
+
+        canvasCenterX = (canvas.getWidth() / 2);
+        canvasCenterY = (canvas.getHeight() / 2);
+
+        objectPadding = 100;
+    }
+
+    /**
+     *
+     * @param canvas
+     * @param color
+     * @param endAngle
+     */
+    public void drawArc(Canvas canvas, String color, int endAngle){
+
+        int left   = (canvasCenterX - objectPadding);
+        int top    = (canvasCenterY - objectPadding);
+        int right  = (canvasCenterX + objectPadding);
+        int bottom = (canvasCenterY + objectPadding);
+
+        // Paint object
         Paint rectPaintNew = new Paint();
-        rectPaintNew.setColor(Color.parseColor("#e7e8e9"));
+        rectPaintNew.setColor(Color.parseColor(color));
         rectPaintNew.setAntiAlias(true);
         rectPaintNew.setStyle(Paint.Style.STROKE);
-        rectPaintNew.setStrokeWidth(12);
+        rectPaintNew.setStrokeWidth(16);
         rectPaintNew.setStrokeCap(Paint.Cap.ROUND);
 
+        // Rectangle point object
         final RectF baseOval = new RectF();
         baseOval.set(left, top, right, bottom);
 
         // draw base arc for contrast
-        canvas.drawArc(baseOval, 0, 360, false, rectPaintNew);
+        canvas.drawArc(baseOval, 90, endAngle, false, rectPaintNew);
+    }
 
-
-        // Pointer Arc Circle
-        // ==================================
-        Paint paint = new Paint();
-        paint.setColor(Color.parseColor("#ff9000"));
-        paint.setAntiAlias(true);
-
-        paint.setStyle(Paint.Style.STROKE);
-        paint.setStrokeWidth(12);
-        paint.setStrokeCap(Paint.Cap.ROUND);
-
-        final RectF oval = new RectF();
-        oval.set(left, top, right, bottom);
-
-        // draw pointer canvas
-        canvas.drawArc(oval, 0, 240, false, paint);
-
-
-        // Canvas Text
-        // ==================================
+    /**
+     *
+     * @param canvas
+     * @param textValue
+     */
+    public void drawText(Canvas canvas, String textValue){
 
         Paint textPaint = new Paint();
-        textPaint.setColor(Color.BLACK);
         textPaint.setStyle(Paint.Style.FILL);
-        //canvas.drawPaint(textPaint);
 
         textPaint.setColor(Color.BLACK);
         textPaint.setTextSize(30);
 
-        String text = "4";
+        //String text = "4";
 
         float textSize = textPaint.getTextSize();
-        float textLengthSize = (text.length() / 2f);
+        float textLengthSize = (textValue.length() / 2f);
 
-        //float textX = (planeCenterX - (textPaint.getTextSize() * Math.abs(text.length() / 2)));
-        float textX = (planeCenterX - (textSize * textLengthSize) / 2);
 
-        float textY = (planeCenterY - ((textPaint.descent() + textPaint.ascent()) / 2));
+        float textX = (canvasCenterX - (textSize * textLengthSize) / 2);
+        float textY = (canvasCenterY - ((textPaint.descent() + textPaint.ascent()) / 2));
 
-        canvas.drawText(text, textX, textY, textPaint);
-
+        canvas.drawText(textValue, textX, textY, textPaint);
     }
 }
