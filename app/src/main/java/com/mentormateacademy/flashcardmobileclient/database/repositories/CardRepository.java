@@ -56,10 +56,6 @@ public class CardRepository extends Repository<Card> {
     }
 
     @Override
-    public Cursor readAllCursor() {
-        return getDatabase().query(DatabaseConfiguration.TABLE_CARDS, null, null, null, null, null, null);
-    }
-
     public ArrayList<Card> readBy(Bundle arguments){
 
         // create empty ArrayList
@@ -75,39 +71,6 @@ public class CardRepository extends Repository<Card> {
         return cardArrayList;
     }
 
-
-//    public Cursor readByCursor(Bundle arguments) {
-//
-//        Set<String> tableColumns  = arguments.keySet();
-//        Iterator<String> iterator = tableColumns.iterator();
-//
-//        ArrayList<String> where = new ArrayList<>();
-//        StringBuilder builder   = new StringBuilder();
-//
-//        while(iterator.hasNext()) {
-//            String element = iterator.next();
-//
-//            if(iterator.hasNext()) {
-//                builder.append(element).append("=? AND ");
-//            }
-//            else {
-//                builder.append(element).append("=?");
-//            }
-//
-//            where.add(arguments.getString(element));
-//            Log.d("DATA_DATA_DATA", arguments.getString(element));
-//        }
-//
-//        // database query
-//        String databaseQuery = builder.toString();
-//
-//        // where arguments array
-//        String[] whereArguments = where.toArray(new String[where.size()]);
-//
-//        return getDatabase().query(DatabaseConfiguration.TABLE_CARDS, null,
-//                databaseQuery, whereArguments, null, null, null);
-//    }
-
     @Override
     public void update(Card element) {
 
@@ -118,10 +81,6 @@ public class CardRepository extends Repository<Card> {
 
     }
 
-    @Override
-    public void deleteAll() {
-        getDatabase().delete(DatabaseConfiguration.TABLE_CARDS, null, null);
-    }
 
     // CardRepository Utility Methods
     // =====================================
@@ -154,5 +113,4 @@ public class CardRepository extends Repository<Card> {
 
         return cardObject;
     }
-
 }

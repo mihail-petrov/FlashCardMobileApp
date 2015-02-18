@@ -44,11 +44,6 @@ public class DeckRepository extends Repository<Deck> {
     }
 
     @Override
-    public Cursor readAllCursor() {
-        return getDatabase().query(DatabaseConfiguration.TABLE_DECKS, null, null, null, null, null, null);
-    }
-
-
     public ArrayList<Deck> readBy(Bundle arguments){
 
         // create empty ArrayList
@@ -67,38 +62,6 @@ public class DeckRepository extends Repository<Deck> {
         return decksArrayList;
     }
 
-
-//    public Cursor readByCursor(Bundle arguments){
-//
-//        Set<String> tableColumns  = arguments.keySet();
-//        Iterator<String> iterator = tableColumns.iterator();
-//
-//        ArrayList<String> where = new ArrayList<>();
-//        StringBuilder builder   = new StringBuilder();
-//
-//        while(iterator.hasNext()) {
-//            String element = iterator.next();
-//
-//            if(iterator.hasNext()) {
-//                builder.append(element).append("=? AND ");
-//            }
-//            else {
-//                builder.append(element).append("=?");
-//            }
-//
-//            where.add(arguments.getString(element));
-//        }
-//
-//        // database query
-//        String databaseQuery = builder.toString();
-//
-//        // where arguments array
-//        String[] whereArguments = where.toArray(new String[where.size()]);
-//
-//        return getDatabase().query(DatabaseConfiguration.TABLE_DECKS, null,
-//                databaseQuery, whereArguments, null, null, null);
-//    }
-
     @Override
     public void update(Deck element) {
 
@@ -108,12 +71,6 @@ public class DeckRepository extends Repository<Deck> {
     public void delete(Deck element) {
 
     }
-
-    @Override
-    public void deleteAll() {
-        getDatabase().delete(DatabaseConfiguration.TABLE_DECKS, null, null);
-    }
-
 
     // DeckRepository Utility Methods
     // =====================================

@@ -22,9 +22,12 @@ public abstract class Repository<T> {
     protected String repositoryTableName;
 
     public Repository(Context context, String tableName) {
+
+        //
         this.databaseHelper = new DatabaseHelper(context);
         this.database = databaseHelper.getWritableDatabase();
 
+        //
         this.repositoryTableName = tableName;
     }
 
@@ -42,10 +45,17 @@ public abstract class Repository<T> {
      */
     public abstract ArrayList<T> readAll();
 
+
+    public abstract ArrayList<T> readBy(Bundle arguments);
+
     /**
      * @return
      */
-    public abstract Cursor readAllCursor();
+//    public abstract Cursor readAllCursor();
+
+    public Cursor readAllCursor() {
+        return getDatabase().query(this.repositoryTableName, null, null, null, null, null, null);
+    }
 
     /**
      * @param element
@@ -60,9 +70,15 @@ public abstract class Repository<T> {
     /**
      *
      */
-    public abstract void deleteAll();
+    public void deleteAll() {
+        getDatabase().delete(this.repositoryTableName, null, null);
+    }
 
-
+    /**
+     *
+     * @param arguments
+     * @return
+     */
     public Cursor readByCursor(Bundle arguments){
 
         Set<String> tableColumns  = arguments.keySet();

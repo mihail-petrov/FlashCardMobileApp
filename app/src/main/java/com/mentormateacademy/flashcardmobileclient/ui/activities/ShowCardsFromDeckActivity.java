@@ -1,10 +1,12 @@
 package com.mentormateacademy.flashcardmobileclient.ui.activities;
 
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -35,8 +37,18 @@ public class ShowCardsFromDeckActivity extends ActionBarActivity {
 
     // UI control variables
     private boolean isFront = true;
-    private int cardIndex   = 1;
+    private int cardIndex = 1;
     private long strategyId;
+
+    // is correct
+    private boolean isCardCorrect = false;
+
+    // count
+    private int cardCount;
+
+    //
+    private int correctAnswer = 0;
+    private int wrongAnswers  = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,14 +61,14 @@ public class ShowCardsFromDeckActivity extends ActionBarActivity {
         getSupportActionBar().setTitle("TODO: Deck Name ");
 
         // get all deck elements
-        long deckId     = getIntent().getLongExtra("DECK_ID", 0);
-        strategyId      = getIntent().getLongExtra("STRATEGY_ID", 0);
+        long deckId = getIntent().getLongExtra("DECK_ID", 0);
+        strategyId = getIntent().getLongExtra("STRATEGY_ID", 0);
 
         // Init card array list
         Bundle arguments = new Bundle();
         arguments.putString("deck_id", String.valueOf(deckId));
         cards = DatabaseRepository.getRepository(this).getCardRepository().readBy(arguments);
-
+        cardCount = cards.size();
         // initialize first fragment view
         initView();
     }
@@ -71,6 +83,7 @@ public class ShowCardsFromDeckActivity extends ActionBarActivity {
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public void moveToNextCard(int index) {
+
         createCard(index);
     }
 
@@ -101,9 +114,8 @@ public class ShowCardsFromDeckActivity extends ActionBarActivity {
     }
 
 
-
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    public void createCard(int index){
+    public void createCard(int index) {
 
         createCardFragment(index);
 
@@ -114,27 +126,43 @@ public class ShowCardsFromDeckActivity extends ActionBarActivity {
                 .replace(R.id.fragmentContainer, frontFragment).commit();
     }
 
-    public void createCardFragment(int index){
+    public void createCardFragment(int index) {
 
-        // get card object
-        Card cardObject = cards.get(index);
+        boolean result = cards.iterator().hasNext();
+        Log.d("ITERATOR_RESULT", "Result --> " + result + " total count " + cardCount);
 
-        String frontTitle   = cardObject.getFrontTitle();
-        String frontContent = cardObject.getFrontContent();
 
-        String backTitle   = cardObject.getBackTitle();
-        String backContent = cardObject.getBackContent();
+        if (index < cardCount) {
+            // get card object
+            Card cardObject = cards.get(index);
 
-        // check if this object exists
-        String extraTitle   = cardObject.getExtraTitle();
-        String extraContent = cardObject.getExtraContent();
+            String frontTitle = cardObject.getFrontTitle();
+            String frontContent = cardObject.getFrontContent();
 
-        //
-        frontFragment = FrontFragment.newInstance(frontTitle, frontContent);
-        backFragment  = BackFragment.newInstance(backTitle, backContent);
+            String backTitle = cardObject.getBackTitle();
+            String backContent = cardObject.getBackContent();
 
-        if(extraTitle != null && extraContent != null) {
-            extraFragment = ExtraFragment.newInstance(extraTitle, extraContent);
+            // check if this object exists
+            String extraTitle = cardObject.getExtraTitle();
+            String extraContent = cardObject.getExtraContent();
+
+            //
+            frontFragment = FrontFragment.newInstance(frontTitle, frontContent);
+            backFragment = BackFragment.newInstance(backTitle, backContent);
+
+            if (extraTitle != null && extraContent != null) {
+                extraFragment = ExtraFragment.newInstance(extraTitle, extraContent);
+            }
+
+        } else {
+            Intent openStatActivity = new Intent(this, StatActivity.class);
+
+            Log.d("BEFORE_SEND", " " + correctAnswer + " " + wrongAnswers + " " + cardCount);
+
+            openStatActivity.putExtra("CORECT", correctAnswer);
+            openStatActivity.putExtra("WRONG", wrongAnswers);
+            openStatActivity.putExtra("TOTAL", cardCount);
+            startActivity(openStatActivity);
         }
     }
 
@@ -143,47 +171,36 @@ public class ShowCardsFromDeckActivity extends ActionBarActivity {
 
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        //
-        //
-        if(strategyId == StrategyConfiguration.ORDER_PROGRESS) {
-
-            getMenuInflater().inflate(R.menu.menu_card_show, menu);
-            myMenu = menu;
-
-            if (isFront) {
-                myMenu.findItem(R.id.flip).setTitle("Back");
-            } else {
-                myMenu.findItem(R.id.flip).setTitle("Front");
-            }
-
-        }
-
-        //
-        //
-        if(strategyId == StrategyConfiguration.SHUFFLE_ORDER) {
-
-            getMenuInflater().inflate(R.menu.menu_card_show, menu);
-            myMenu = menu;
-
-            if (isFront) {
-                myMenu.findItem(R.id.flip).setTitle("Back");
-            } else {
-                myMenu.findItem(R.id.flip).setTitle("Front");
-            }
-
-        }
-
-        //
-        //
-        if(strategyId == StrategyConfiguration.SPACED_REPETITION) {
+        // SPACED REPETITION
+        // ===================================================
+        if (strategyId == StrategyConfiguration.SPACED_REPETITION) {
             getMenuInflater().inflate(R.menu.menu_strategy_spaced, menu);
         }
-
 
         return true;
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (strategyId == StrategyConfiguration.SPACED_REPETITION) {
+
+            if (item.getItemId() == R.id.correct) {
+                this.isCardCorrect = true;
+                invalidateOptionsMenu();
+                Log.d("MENU_LOG", "CORRECT_IS_CORRECT");
+
+                correctAnswer++;
+            }
+
+            if (item.getItemId() == R.id.incorrect) {
+                this.isCardCorrect = true;
+                invalidateOptionsMenu();
+                Log.d("MENU_LOG", "WRONG_IS_WRONG");
+
+                wrongAnswers++;
+            }
+        }
+
 
         if (item.getItemId() == R.id.flip) {
 
@@ -199,10 +216,26 @@ public class ShowCardsFromDeckActivity extends ActionBarActivity {
             moveToNextCard(cardIndex);
             cardIndex++;
             isFront = true;
+            isCardCorrect = false;
         }
 
         return false;
     }
 
 
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+
+        if (isCardCorrect) {
+            menu.clear();
+            getMenuInflater().inflate(R.menu.menu_card_show, menu);
+            invalidateOptionsMenu();
+        } else {
+            menu.clear();
+            getMenuInflater().inflate(R.menu.menu_strategy_spaced, menu);
+            //invalidateOptionsMenu();
+        }
+
+        return true;
+    }
 }

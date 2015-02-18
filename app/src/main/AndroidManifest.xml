@@ -18,19 +18,20 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.activities.DeckListActivity"></activity>
+        <activity android:name=".ui.activities.DeckListActivity"/>
 
         <activity
             android:name=".ui.activities.NewDeckActivity"
-            android:label="NewDeck"></activity>
+            android:label="NewDeck"/>
 
         <activity
             android:name=".ui.activities.CardListActivity"
-            android:label="CardList"></activity>
+            android:label="CardList"/>
 
-        <activity android:name=".ui.activities.ShowCardsFromDeckActivity">
+        <activity android:name=".ui.activities.ShowCardsFromDeckActivity"/>
 
-        </activity>
+        <activity android:name=".ui.activities.StatActivity"/>
+
     </application>
 
 </manifest>

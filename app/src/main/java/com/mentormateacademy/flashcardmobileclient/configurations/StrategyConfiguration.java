@@ -9,5 +9,5 @@ public interface StrategyConfiguration {
     public static final int SHUFFLE_ORDER= 2;
 
     //
-    public static final int ORDER_PROGRESS = 1;
+    public static final int ORDER_PROGRESS = 3;
 }
