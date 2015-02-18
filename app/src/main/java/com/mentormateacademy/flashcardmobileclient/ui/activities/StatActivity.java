@@ -17,9 +17,7 @@ public class StatActivity extends ActionBarActivity {
         int wrongA      = intent.getIntExtra("WRONG", 0);
         int totalC      = intent.getIntExtra("TOTAL", 0);
 
-
         CanvasView view = new CanvasView(this, correctA, totalC, true);
         setContentView(view);
-
     }
 }
