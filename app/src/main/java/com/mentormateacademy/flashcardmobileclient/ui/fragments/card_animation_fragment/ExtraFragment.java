@@ -1,18 +1,19 @@
 package com.mentormateacademy.flashcardmobileclient.ui.fragments.card_animation_fragment;
 
-import android.annotation.TargetApi;
-import android.app.Fragment;
-import android.os.Build;
+
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.mentormateacademy.flashcardmobileclient.R;
+import com.mentormateacademy.flashcardmobileclient.configurations.ExtraFlagsConfiguration;
 
-@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+
 public class ExtraFragment extends Fragment {
 
 
@@ -20,34 +21,27 @@ public class ExtraFragment extends Fragment {
 
     }
 
-    public static ExtraFragment newInstance(String cardTitle, String cardContent) {
-
-        Bundle arguments = new Bundle();
-        arguments.putString("card_title", cardTitle);
-        arguments.putString("card_content", cardContent);
-
-        // create fragment
+    public static ExtraFragment newInstance(Bundle arguments) {
         ExtraFragment fragment = new ExtraFragment();
         fragment.setArguments(arguments);
 
         return fragment;
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View fragmentView = inflater.inflate(R.layout.front_layout, container, false);
 
-        Bundle arguments = getArguments();
+        if (getArguments().getString(ExtraFlagsConfiguration.EXTRA_CARD_CONTENT) != null) {
+            TextView cardContent = (TextView) fragmentView.findViewById(R.id.cardContent);
 
-        // TODO: Remove clean context
-        View fragmentView = inflater.inflate(R.layout.extra_layout, container, false);
-
-//        TextView cardTitle = (TextView) fragmentView.findViewById(R.id.cardTitle);
-        TextView cardContent = (TextView) fragmentView.findViewById(R.id.cardContent);
-
-
-        if (arguments != null) {
-//            cardTitle.setText(getArguments().getString("card_title"));
-            cardContent.setText(getArguments().getString("card_content"));
+            String styledText = getArguments().getString(ExtraFlagsConfiguration.EXTRA_CARD_CONTENT);
+            cardContent.setText(Html.fromHtml(styledText), TextView.BufferType.SPANNABLE);
+        }
+        else {
+            TextView cardContent = (TextView) fragmentView.findViewById(R.id.cardContent);
+            cardContent.setText("No Extra Data");
         }
         return fragmentView;
     }

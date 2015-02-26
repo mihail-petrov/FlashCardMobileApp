@@ -21,6 +21,9 @@ public abstract class Repository<T> {
 
     protected String repositoryTableName;
 
+    protected String whereQuery;
+    protected String[] whereArguments;
+
     public Repository(Context context, String tableName) {
 
         //
@@ -106,7 +109,46 @@ public abstract class Repository<T> {
         // where arguments array
         String[] whereArguments = where.toArray(new String[where.size()]);
 
+
         return getDatabase().query(this.repositoryTableName, null,
                 databaseQuery, whereArguments, null, null, null);
+    }
+
+
+    public void buildWhereQuery(Bundle arguments){
+
+        Set<String> tableColumns  = arguments.keySet();
+        Iterator<String> iterator = tableColumns.iterator();
+
+        ArrayList<String> where = new ArrayList<>();
+        StringBuilder builder   = new StringBuilder();
+
+        while(iterator.hasNext()) {
+            String element = iterator.next();
+
+            if(iterator.hasNext()) {
+                builder.append(element).append("=? AND ");
+            }
+            else {
+                builder.append(element).append("=?");
+            }
+
+            where.add(arguments.getString(element));
+        }
+
+        // database query
+        this.whereQuery = builder.toString();
+
+        // where arguments array
+        this.whereArguments = where.toArray(new String[where.size()]);
+    }
+
+
+    public String getWhereQuery(){
+        return this.whereQuery;
+    }
+
+    public String[] getWhereArguments(){
+        return this.whereArguments;
     }
 }

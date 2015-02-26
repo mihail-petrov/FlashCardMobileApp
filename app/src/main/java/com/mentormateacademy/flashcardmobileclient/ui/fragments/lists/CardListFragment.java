@@ -1,34 +1,43 @@
 package com.mentormateacademy.flashcardmobileclient.ui.fragments.lists;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.mentormateacademy.flashcardmobileclient.R;
-import com.mentormateacademy.flashcardmobileclient.data.adapters.CardCursorAdapter;
-import com.mentormateacademy.flashcardmobileclient.data.loaders.BaseCursorLoader;
-import com.mentormateacademy.flashcardmobileclient.data.loaders.cursorProviders.CardCursorProvider;
+import com.mentormateacademy.flashcardmobileclient.data.loaders.cursorObjects.CardCursorObject;
+import com.mentormateacademy.flashcardmobileclient.data.loaders.interfaces.BaseCursorLoader;
+import com.mentormateacademy.flashcardmobileclient.data.singletons.DataHolder;
 
-public class CardListFragment extends Fragment {
+public class CardListFragment extends Fragment implements AdapterView.OnItemClickListener {
 
+
+    // Fragment - Constructor
+    // ========================================
     public CardListFragment() {
 
     }
 
-    public static CardListFragment newInstance(long deckId, long strategyId) {
-
-        Bundle arguments = new Bundle();
-        arguments.putLong("DECK_ID", deckId);
-        arguments.putLong("STRATEGY_ID", strategyId);
+    public static CardListFragment newInstance() {
 
         CardListFragment cardListFragment = new CardListFragment();
-        cardListFragment.setArguments(arguments);
-
         return cardListFragment;
+    }
+
+
+    // Fragment - Life Cycle
+    // ========================================
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        mActivity = (fragmentActionCallback) activity;
     }
 
     @Override
@@ -36,24 +45,42 @@ public class CardListFragment extends Fragment {
 
         View fragmentView = inflater.inflate(R.layout.fragment_list_cards, container, false);
 
-        long id = getArguments().getLong("DECK_ID");
+        long id = DataHolder.getData().getDeckId();
 
-        // cursor adapter
-        CardCursorAdapter cursorAdapter = new CardCursorAdapter(getActivity(), null);
-
-        // cursor provider
-        CardCursorProvider cursorProvider = new CardCursorProvider(getActivity(), id);
-
-        // cursor loader
-        BaseCursorLoader cursorLoader = new BaseCursorLoader(cursorAdapter, cursorProvider);
+        // Get Cursor Loader
+        BaseCursorLoader cursorLoader = new CardCursorObject(getActivity(), id).getCursorLoader();
 
         // get list component
         ListView cardListView = (ListView) fragmentView.findViewById(R.id.cardsListView);
         cardListView.setAdapter(cursorLoader.getCursorAdapter());
+        cardListView.setOnItemClickListener(this);
 
         //
         getLoaderManager().initLoader(0, null, cursorLoader);
 
         return fragmentView;
+    }
+
+    // Fragment - Event Handler
+    // ========================================
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+        DataHolder.getData().setCardId(id);
+        mActivity.onCardItemSelected();
+    }
+
+    // Fragment - Interface Callback
+    // ========================================
+
+    private fragmentActionCallback mActivity;
+
+    public interface fragmentActionCallback {
+
+        /**
+         *
+         */
+        public void onCardItemSelected();
     }
 }

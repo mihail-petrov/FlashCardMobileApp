@@ -1,51 +1,43 @@
 package com.mentormateacademy.flashcardmobileclient.ui.fragments.card_animation_fragment;
 
-import android.annotation.TargetApi;
-import android.app.Fragment;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.mentormateacademy.flashcardmobileclient.R;
+import com.mentormateacademy.flashcardmobileclient.configurations.ExtraFlagsConfiguration;
 
-@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+
 public class BackFragment extends Fragment {
 
     public BackFragment() {
     }
 
-    public static BackFragment newInstance(String cardTitle, String cardContent) {
+    public static BackFragment newInstance(Bundle arguments) {
 
-        Bundle arguments = new Bundle();
-        arguments.putString("card_title", cardTitle);
-        arguments.putString("card_content", cardContent);
-
-        // create fragment
         BackFragment fragment = new BackFragment();
         fragment.setArguments(arguments);
 
         return fragment;
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        Bundle arguments = getArguments();
+        View fragmentView = inflater.inflate(R.layout.front_layout, container, false);
 
-        // TODO: Remove clean context
-        View fragmentView = inflater.inflate(R.layout.back_layout, container, false);
+        if (getArguments() != null) {
+            TextView cardContent = (TextView) fragmentView.findViewById(R.id.cardContent);
 
-//        TextView cardTitle = (TextView) fragmentView.findViewById(R.id.cardTitle);
-        TextView cardContent = (TextView) fragmentView.findViewById(R.id.cardContent);
+            String styledText = getArguments().getString(ExtraFlagsConfiguration.BACK_CARD_CONTENT);
+            cardContent.setText(Html.fromHtml(styledText), TextView.BufferType.SPANNABLE);
 
-
-        if (arguments != null) {
-//            cardTitle.setText(getArguments().getString("card_title"));
-            cardContent.setText(getArguments().getString("card_content"));
         }
         return fragmentView;
     }

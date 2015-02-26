@@ -7,7 +7,7 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
 
-import com.mentormateacademy.flashcardmobileclient.data.adapters.CardCursorAdapter;
+import com.mentormateacademy.flashcardmobileclient.data.adapters.cursor.CardCursorAdapter;
 import com.mentormateacademy.flashcardmobileclient.data.loaders.cursorProviders.CardCursorProvider;
 
 public class CardCursorLoader implements LoaderManager.LoaderCallbacks<Cursor> {
@@ -22,7 +22,6 @@ public class CardCursorLoader implements LoaderManager.LoaderCallbacks<Cursor> {
 
         // load cursor provider
         this.cursorProvider = new CardCursorProvider(context, deckId);
-
     }
 
 

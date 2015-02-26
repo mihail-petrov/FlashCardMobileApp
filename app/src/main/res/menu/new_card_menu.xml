@@ -1,16 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/clear_all_cards"
-        android:title="clear all"></item>
+        android:title="clear all"
+        app:showAsAction="always"
+        />
 
     <item
         android:id="@+id/clear_this_cards"
-        android:title="clear this"></item>
+        android:title="clear this"
+        app:showAsAction="always"
+        />
 
     <item
         android:id="@+id/save_card"
-        android:title="save"></item>
+        android:title="save"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_done_black_24dp"
+        />
 
 </menu>

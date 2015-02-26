@@ -1,52 +1,73 @@
 package com.mentormateacademy.flashcardmobileclient.ui.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 
-import com.mentormateacademy.flashcardmobileclient.R;
+import com.mentormateacademy.flashcardmobileclient.component.baseComponents.BaseActivity;
+import com.mentormateacademy.flashcardmobileclient.ui.fragments.edit.deck.NewDeckFragment;
 import com.mentormateacademy.flashcardmobileclient.ui.fragments.lists.DecksListFragment;
 
-public class DeckListActivity extends ActionBarActivity {
+public class DeckListActivity extends BaseActivity
+        implements
+            DecksListFragment.fragmentActionCallback,
+            NewDeckFragment.fragmentActionCallback
+        {
 
-    private Toolbar topToolbar;
+    //  Activity -- Life Cycle
+    // =============================================
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fragment_view);
 
-        //
-        topToolbar = (Toolbar) findViewById(R.id.topToolbar);
-        setSupportActionBar(topToolbar);
+        initFragment();
+    }
 
-        getSupportActionBar().setTitle("My Decks");
+    //  Activity -- Helper Methods
+    // =============================================
 
-        //
-        getSupportFragmentManager()
-                .beginTransaction()
-                .add(R.id.fragmentContainer, new DecksListFragment())
-                .commit();
+    public void initFragment() {
+        initDeckListFragment();
+    }
+
+    public void initDeckListFragment(){
+        setToolbarTitle("My Decks");
+        setFragment(DecksListFragment.newInstance(), false);
+    }
+
+    public void initAddDeckFragment(){
+        setToolbarTitle("New Deck");
+        setFragment(NewDeckFragment.newInstance(), false);
+    }
+
+    //  Activity -- Action Callbacks
+    // =============================================
+
+    @Override
+    public void onDeckItemAdded() {
+        initAddDeckFragment();
+    }
+
+    public void onDeckItemSelected() {
+
+        Intent openCardListActivity = new Intent(this, CardListActivity.class);
+        startActivity(openCardListActivity);
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_new_deck, menu);
-        return true;
+    public void onSettingsSelected() {
+        SharedPreferences settings = getSharedPreferences("USER_DATA", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.clear().commit();
+
+        Intent openActivity = new Intent(this, WelcomeActivity.class);
+        startActivity(openActivity);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        if (item.getItemId() == R.id.add_new_deck) {
-            Intent openNewDeckActivity = new Intent(DeckListActivity.this, NewDeckActivity.class);
-            startActivity(openNewDeckActivity);
-            return true;
-        }
-
-        return false;
+            @Override
+    public void addNewDeck() {
+        initFragment();
     }
 }

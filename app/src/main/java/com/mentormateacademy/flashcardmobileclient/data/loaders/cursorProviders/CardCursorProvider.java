@@ -3,9 +3,9 @@ package com.mentormateacademy.flashcardmobileclient.data.loaders.cursorProviders
 import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Log;
 
-import com.mentormateacademy.flashcardmobileclient.data.loaders.BaseCursorProvider;
+import com.mentormateacademy.flashcardmobileclient.configurations.DatabaseConfiguration;
+import com.mentormateacademy.flashcardmobileclient.data.loaders.interfaces.BaseCursorProvider;
 import com.mentormateacademy.flashcardmobileclient.database.helper.DatabaseRepository;
 import com.mentormateacademy.flashcardmobileclient.database.repositories.CardRepository;
 
@@ -24,12 +24,9 @@ public class CardCursorProvider extends BaseCursorProvider {
     @Override
     public Cursor loadInBackground() {
 
-        Log.d("DATA_DATA_DATA", String.valueOf(this.deckId));
-
         Bundle bundle = new Bundle();
-        bundle.putString("deck_id", String.valueOf(this.deckId));
-        return this.cardRepository.readByCursor(bundle);
+        bundle.putString(DatabaseConfiguration.TABLE_CARDS_DECK_ID, String.valueOf(this.deckId));
 
-//        return  this.cardRepository.readAllCursor();
+        return this.cardRepository.readByCursor(bundle);
     }
 }

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/play_card"
+        android:title="play deck"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_play_arrow_black_24dp"
+        />
+
+    <item
+        android:id="@+id/card_stat"
+        android:title="card stat"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_assessment_black_24dp"
+        />
+
+    <item
+        android:id="@+id/add_card"
+        android:title="add card"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_add_black_24dp"
+        />
+
+    <item
+        android:id="@+id/edit_deck"
+        android:title="edit deck"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_mode_edit_black_24dp"
+        />
+
+    <item
+        android:id="@+id/list_view"
+        android:title="list view"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_receipt_black_24dp"
+        />
+
+</menu>

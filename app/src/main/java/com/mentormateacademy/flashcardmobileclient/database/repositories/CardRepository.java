@@ -11,6 +11,8 @@ import com.mentormateacademy.flashcardmobileclient.database.interfaces.Repositor
 import com.mentormateacademy.flashcardmobileclient.models.Card;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Set;
 
 
 public class CardRepository extends Repository<Card> {
@@ -19,20 +21,43 @@ public class CardRepository extends Repository<Card> {
         super(context, DatabaseConfiguration.TABLE_CARDS);
     }
 
+    public void create(Bundle arguments) {
+
+        ContentValues values = ConvertBundleToContentValue(arguments);
+        getDatabase().insert(DatabaseConfiguration.TABLE_CARDS, null, values);
+
+        Log.d("DB_HELPER", "Insert record in table " + DatabaseConfiguration.TABLE_CARDS);
+
+    }
+
+
+    private ContentValues ConvertBundleToContentValue(Bundle arguments){
+
+        // check bundle length
+        int length = arguments.size();
+
+        // create content values object
+        ContentValues values = new ContentValues(length);
+
+        // get Bundle keys
+        Set<String> bundleKeys = arguments.keySet();
+
+        // get Bundle iterator
+        Iterator<String> iterator = bundleKeys.iterator();
+
+        while (iterator.hasNext()) {
+
+            String keyElement = iterator.next();
+            values.put(keyElement, arguments.getString(keyElement));
+        }
+
+        return values;
+    }
+
     @Override
     public void create(Card element) {
-        ContentValues values = new ContentValues(7);
-        values.put("deck_id", element.getDeckId());
 
-        values.put("front_title", element.getFrontTitle());
-        values.put("front_content", element.getFrontContent());
-
-        values.put("back_title", element.getBackTitle());
-        values.put("back_content", element.getBackContent());
-
-        values.put("extra_title", element.getExtraTitle());
-        values.put("extra_content", element.getExtraContent());
-
+        ContentValues values = getContentValueObject(element);
         getDatabase().insert(DatabaseConfiguration.TABLE_CARDS, null, values);
 
         Log.d("DB_HELPER", "Insert record in table " + DatabaseConfiguration.TABLE_CARDS);
@@ -81,9 +106,41 @@ public class CardRepository extends Repository<Card> {
 
     }
 
+    public void update(Card element, Bundle updateElement) {
+
+        ContentValues values = getContentValueObject(element);
+        buildWhereQuery(updateElement);
+
+        getDatabase().update(DatabaseConfiguration.TABLE_CARDS, values, getWhereQuery(), getWhereArguments());
+    }
+
+
+
+    public void delete(Bundle deleteElement) {
+        buildWhereQuery(deleteElement);
+        getDatabase().delete(DatabaseConfiguration.TABLE_CARDS, getWhereQuery(), getWhereArguments());
+    }
+
 
     // CardRepository Utility Methods
     // =====================================
+
+    public ContentValues getContentValueObject(Card element){
+
+        ContentValues values = new ContentValues(7);
+        values.put("deck_id", element.getDeckId());
+
+        values.put("front_title", element.getFrontTitle());
+        values.put("front_content", element.getFrontContent());
+
+        values.put("back_title", element.getBackTitle());
+        values.put("back_content", element.getBackContent());
+
+        values.put("extra_title", element.getExtraTitle());
+        values.put("extra_content", element.getExtraContent());
+
+        return values;
+    }
 
     public Card getCard(Cursor cursorPointer){
 

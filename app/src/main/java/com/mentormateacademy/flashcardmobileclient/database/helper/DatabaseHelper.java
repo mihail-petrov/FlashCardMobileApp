@@ -16,6 +16,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
+        // create table user
+        db.execSQL(DatabaseConfiguration.TABLE_USERS_CREATE_QUERY);
+        Log.d("DB_HELPER_LOG", "Create table query : " + DatabaseConfiguration.TABLE_USERS_CREATE_QUERY);
+
         // create table deck
         db.execSQL(DatabaseConfiguration.TABLE_DECKS_CREATE_QUERY);
         Log.d("DB_HELPER_LOG", "Create table query : " + DatabaseConfiguration.TABLE_DECKS_CREATE_QUERY);
@@ -28,7 +32,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
-        // drop category table
+        // drop user table
+        db.execSQL(DatabaseConfiguration.TABLE_USERS_DROP_QUERY);
+
+        // drop card table
         db.execSQL(DatabaseConfiguration.TABLE_DECKS_DROP_QUERY);
 
         // drop notes table

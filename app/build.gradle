@@ -22,13 +22,20 @@ android {
     sourceSets {
         main {
             res.srcDirs =
-                    [
-                            "/src/main/res/layouts/fragments",
-                            "/src/main/res/layouts/activities",
-                            "/src/main/res/layouts/list_elements",
-                            "/src/main/res/layouts",
-                            "/src/main/res"
-                    ]
+                [
+                        "/src/main/res/layouts/fragments/welcome_screen",
+                        "/src/main/res/layouts/fragments/decks",
+                        "/src/main/res/layouts/fragments/stats",
+                        "/src/main/res/layouts/fragments/cards",
+                        "/src/main/res/layouts/fragments/application",
+
+                        "/src/main/res/layouts/fragments",
+                        "/src/main/res/layouts/activities",
+                        "/src/main/res/layouts/list_elements",
+                        "/src/main/res/layouts/toolbars",
+                        "/src/main/res/layouts",
+                        "/src/main/res"
+                ]
         }
     }
 }
@@ -36,4 +43,5 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:21.0.3'
+    compile 'com.koushikdutta.ion:ion:2.+'
 }

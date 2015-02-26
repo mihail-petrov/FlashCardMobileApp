@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/next_card_element"
+        android:title="next"
+        android:icon="@drawable/ic_swap_horiz_black_24dp"
+        app:showAsAction="always"
+        android:visible="false"
+        />
+
+    <item android:id="@+id/extra_card"
+        android:title="extra"
+        app:showAsAction="always"
+        android:visible="false"
+        android:icon="@drawable/ic_explicit_black_24dp"
+        />
+
+</menu>

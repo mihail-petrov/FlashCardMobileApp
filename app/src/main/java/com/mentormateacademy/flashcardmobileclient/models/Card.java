@@ -1,5 +1,9 @@
 package com.mentormateacademy.flashcardmobileclient.models;
 
+import android.os.Bundle;
+
+import com.mentormateacademy.flashcardmobileclient.configurations.ExtraFlagsConfiguration;
+
 public class Card {
 
     private long _id;
@@ -76,5 +80,60 @@ public class Card {
 
     public void setExtraContent(String extraContent) {
         this.extraContent = extraContent;
+    }
+
+
+    public Bundle getFrontData(){
+        Bundle frontBundle = new Bundle();
+        frontBundle.putString(ExtraFlagsConfiguration.FRONT_CARD_TITLE, getFrontTitle());
+        frontBundle.putString(ExtraFlagsConfiguration.FRONT_CARD_CONTENT, getFrontContent());
+
+        return frontBundle;
+    }
+
+    public Bundle getBackData(){
+        Bundle frontBundle = new Bundle();
+        frontBundle.putString(ExtraFlagsConfiguration.BACK_CARD_TITLE, getBackTitle());
+        frontBundle.putString(ExtraFlagsConfiguration.BACK_CARD_CONTENT, getBackContent());
+
+        return frontBundle;
+    }
+
+    public Bundle getExtraData(){
+        Bundle frontBundle = new Bundle();
+        frontBundle.putString(ExtraFlagsConfiguration.EXTRA_CARD_TITLE, getExtraTitle());
+        frontBundle.putString(ExtraFlagsConfiguration.EXTRA_CARD_CONTENT, getExtraContent());
+
+        return frontBundle;
+    }
+
+
+
+
+    public void setCardContent(Bundle arguments){
+
+        if(arguments.getString(ExtraFlagsConfiguration.FRONT_CARD_TITLE) != null) {
+            setFrontTitle(arguments.getString(ExtraFlagsConfiguration.FRONT_CARD_TITLE));
+        }
+
+        if(arguments.getString(ExtraFlagsConfiguration.FRONT_CARD_CONTENT) != null) {
+            setFrontContent(arguments.getString(ExtraFlagsConfiguration.FRONT_CARD_CONTENT));
+        }
+
+        if(arguments.getString(ExtraFlagsConfiguration.BACK_CARD_TITLE) != null) {
+            setBackTitle(arguments.getString(ExtraFlagsConfiguration.BACK_CARD_TITLE));
+        }
+
+        if(arguments.getString(ExtraFlagsConfiguration.BACK_CARD_CONTENT) != null) {
+            setBackContent(arguments.getString(ExtraFlagsConfiguration.BACK_CARD_CONTENT));
+        }
+
+        if(arguments.getString(ExtraFlagsConfiguration.EXTRA_CARD_TITLE) != null) {
+            setExtraTitle(arguments.getString(ExtraFlagsConfiguration.EXTRA_CARD_TITLE));
+        }
+
+        if(arguments.getString(ExtraFlagsConfiguration.EXTRA_CARD_CONTENT) != null) {
+            setExtraContent(arguments.getString(ExtraFlagsConfiguration.EXTRA_CARD_CONTENT));
+        }
     }
 }

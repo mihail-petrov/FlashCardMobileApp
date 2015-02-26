@@ -3,18 +3,31 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/correct"
-        android:title="correct"
-        android:icon="@drawable/ic_done_black_24dp"
+        android:id="@+id/flip"
+        android:title="flip"
         app:showAsAction="always"
-        />
+        android:visible="false"
+        ></item>
 
-    <item
-        android:id="@+id/incorrect"
-        android:title="incorrect"
-        android:icon="@drawable/ic_clear_black_24dp"
-        app:showAsAction="always"
-        />
+    <!--<item-->
+        <!--android:id="@+id/next"-->
+        <!--android:title="next element"-->
+        <!--app:showAsAction="always"-->
+        <!--/>-->
+
+    <!--<item-->
+        <!--android:id="@+id/correct"-->
+        <!--android:title="correct"-->
+        <!--android:icon="@drawable/ic_done_black_24dp"-->
+        <!--app:showAsAction="always"-->
+        <!--/>-->
+
+    <!--<item-->
+        <!--android:id="@+id/incorrect"-->
+        <!--android:title="incorrect"-->
+        <!--android:icon="@drawable/ic_clear_black_24dp"-->
+        <!--app:showAsAction="always"-->
+        <!--/>-->
 
 
 

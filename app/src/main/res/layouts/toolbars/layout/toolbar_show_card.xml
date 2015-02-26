@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/bottomToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#E0E0E0">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <LinearLayout
+                android:id="@+id/grade_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageButton
+                    android:id="@+id/front_screen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:background="@drawable/ic_done_black_24dp" />
+
+                <ImageButton
+                    android:id="@+id/back_screen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:background="@drawable/ic_clear_black_24dp" />
+            </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/next_screen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:background="@drawable/ic_arrow_forward_black_24dp"
+                android:visibility="gone" />
+
+            <!--<ImageButton-->
+            <!--android:id="@+id/extra_screen"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@drawable/ic_explicit_black_24dp" />-->
+
+            <!--<ImageButton-->
+            <!--android:id="@+id/save_card"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@drawable/ic_done_black_24dp" />-->
+
+        </LinearLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+
+</LinearLayout>
