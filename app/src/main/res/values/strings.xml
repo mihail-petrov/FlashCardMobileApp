@@ -1,8 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">FlashCardMobileClient</string>
+    <string name="app_name">Flash Know</string>
     <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+
+    <string-array name="sample_card_front">
+        <item>Palilalia</item>
+        <item>Echolalia</item>
+        <item>Epilepsy</item>
+        <item>Logorrhea</item>
+        <item>Schizophrenia</item>
+    </string-array>
+
+    <string-array name="sample_card_back">
+        <item>A complex tic, is a speech disorder characterized by the involuntary repetition of syllables, words, or phrases</item>
+        <item>Automatic repetition of vocalizations made by another person</item>
+        <item>A group of neurological disorders characterized by epileptic seizures</item>
+        <item>A communication disorder, expressed by excessive wordiness with minor or sometimes incoherent talkativeness</item>
+        <item>A mental disorder often characterized by abnormal social behavior and failure to recognize what is real.</item>
+    </string-array>
+
+    <string-array name="sample_card_extra">
+        <item>Origin: Greek</item>
+        <item>Origin: Greek</item>
+        <item>Origin: Greek</item>
+        <item>Origin: Greek</item>
+        <item>Origin: Latin</item>
+    </string-array>
+
+
+    <string-array name="card_title_keys">
+        <item>front_title</item>
+        <item>back_title</item>
+        <item>extra_title</item>
+    </string-array>
+
+    <string-array name="card_content_keys">
+        <item>front_content</item>
+        <item>back_content</item>
+        <item>extra_content</item>
+    </string-array>
+
+
+    <!-- Validation Messages -->
+    <string name="validation_email">Invalid E-mail address</string>
+    <string name="validation_password">Invalid password field</string>
+    <string name="validation_user_existence">User does not exists</string>
+    <string name="validation_user_profile">User does not exists</string>
+
+    <!-- Card Content Messages -->
+    <string name="front_card_content">Front Card must have content</string>
+    <string name="back_card_content">Back Card must have content</string>
+
+    <!-- Card Warning Messages -->
+    <string name="extra_card_warning">No Extra Data</string>
+
+
+
 
 </resources>

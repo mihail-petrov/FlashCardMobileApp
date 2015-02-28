@@ -2,21 +2,64 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mentormateacademy.flashcardmobileclient">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+
     <application
         android:name=".database.seeder.DatabaseSeeder"
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/flashcard_shortcode_icon"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
-    <activity
-            android:name=".ui.activities.MainActivity"
-            android:label="@string/app_name">
+
+        <!---->
+        <activity
+            android:name=".ui.activities.DeckListActivity"
+            android:configChanges="orientation|screenSize"
+            />
+
+        <!---->
+        <activity
+            android:name=".ui.activities.CardListActivity"
+            android:parentActivityName=".ui.activities.DeckListActivity"
+            android:configChanges="orientation|screenSize"
+
+            android:label="CardList">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.activities.DeckListActivity" />
+
+        </activity>
+
+        <!---->
+        <activity
+            android:name=".ui.activities.WelcomeActivity"
+            android:configChanges="orientation|screenSize"
+            >
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+            </activity>
+
+        <!---->
+        <activity
+
+            android:name=".ui.activities.CardActivity"
+            android:parentActivityName=".ui.activities.CardListActivity"
+            android:configChanges="orientation|screenSize"
+            >
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.activities.CardListActivity" />
+
         </activity>
+
+
     </application>
 
 </manifest>

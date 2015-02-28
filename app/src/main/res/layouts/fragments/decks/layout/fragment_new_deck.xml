@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:text="Deck Name"
+                android:textStyle="bold" />
+
+            <!-- Title of the new deck -->
+            <EditText
+                android:id="@+id/deckTitleEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:hint="Example: English words week 1" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Card Repetition Strategy"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+
+            <com.mentormateacademy.flashcardmobileclient.component.customComponents.extendRadioGroup.ExtendRadioGroup
+                android:id="@+id/deckStrategyRadioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp">
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                    <TableRow android:layout_marginBottom="18dp">
+
+                        <RadioButton
+                            android:id="@+id/orderProgress"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:paddingLeft="16dp" />
+
+                        <LinearLayout android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="4dp"
+                                android:text="Order progress"
+                                android:textSize="18dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Play your cards in fixed order, without score tracing" />
+
+                        </LinearLayout>
+
+                    </TableRow>
+
+
+                    <TableRow android:layout_marginBottom="18dp">
+
+                        <RadioButton
+                            android:id="@+id/spacedRepetition"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="16dp" />
+
+
+                        <LinearLayout android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="4dp"
+                                android:text="Spaced repetition"
+                                android:textSize="18dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Grade your card guesses, based on your repetition" />
+
+                        </LinearLayout>
+
+                    </TableRow>
+
+
+                    <TableRow android:layout_marginBottom="18dp">
+
+                        <RadioButton
+                            android:id="@+id/shuffleRepetition"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="16dp" />
+
+                        <LinearLayout android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="4dp"
+                                android:text="Shuffle repetition"
+                                android:textSize="18dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Lorem ipsum dolor si amet ala bala gluposit" />
+
+                        </LinearLayout>
+
+
+                    </TableRow>
+
+                </TableLayout>
+
+            </com.mentormateacademy.flashcardmobileclient.component.customComponents.extendRadioGroup.ExtendRadioGroup>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
