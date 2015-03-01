@@ -132,7 +132,7 @@ public class LoginFragment
                 mActivity.onLoginSuccess();
             }
             else {
-                userEmailEditText.setError(getActivity().getResources().getString(R.string.validation_user_existance));
+                userEmailEditText.setError(getActivity().getResources().getString(R.string.validation_user_existence));
             }
         }
     }
