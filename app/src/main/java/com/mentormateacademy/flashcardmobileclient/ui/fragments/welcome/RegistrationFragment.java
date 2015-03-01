@@ -77,8 +77,8 @@ public class RegistrationFragment extends Fragment implements View.OnClickListen
     public void registration(){
 
         //
-        boolean isEmailValid = false;
-        boolean isPassValid  = false;
+        boolean isEmailValid;
+        boolean isPassValid;
 
         // get field credentials
         String userEmail = userEmailEditText.getText().toString();

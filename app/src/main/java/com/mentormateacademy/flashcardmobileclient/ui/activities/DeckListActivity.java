@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.mentormateacademy.flashcardmobileclient.component.baseComponents.BaseActivity;
+import com.mentormateacademy.flashcardmobileclient.configurations.SharedPreferencesConfigurations;
 import com.mentormateacademy.flashcardmobileclient.ui.fragments.edit.deck.NewDeckFragment;
 import com.mentormateacademy.flashcardmobileclient.ui.fragments.lists.DecksListFragment;
 
@@ -58,9 +59,10 @@ public class DeckListActivity extends BaseActivity
 
     @Override
     public void onSettingsSelected() {
-        SharedPreferences settings = getSharedPreferences("USER_DATA", Context.MODE_PRIVATE);
+        SharedPreferences settings =
+                getSharedPreferences(SharedPreferencesConfigurations.USER_DATA, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = settings.edit();
-        editor.clear().commit();
+        editor.clear().apply();
 
         Intent openActivity = new Intent(this, WelcomeActivity.class);
         startActivity(openActivity);

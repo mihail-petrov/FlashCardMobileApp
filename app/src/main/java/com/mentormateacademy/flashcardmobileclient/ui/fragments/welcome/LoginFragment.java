@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.mentormateacademy.flashcardmobileclient.R;
+import com.mentormateacademy.flashcardmobileclient.configurations.SharedPreferencesConfigurations;
 import com.mentormateacademy.flashcardmobileclient.data.singletons.DataHolder;
 import com.mentormateacademy.flashcardmobileclient.database.helper.DatabaseRepository;
 import com.mentormateacademy.flashcardmobileclient.helpers.ValidationHelper;
@@ -78,8 +79,8 @@ public class LoginFragment
     public void login(){
 
         //
-        boolean isEmailValid = false;
-        boolean isPassValid  = false;
+        boolean isEmailValid;
+        boolean isPassValid;
 
         // get field credentials
         String userEmail = userEmailEditText.getText().toString();
@@ -122,10 +123,12 @@ public class LoginFragment
                 DataHolder.getData().setUserId(userId);
 
                 // check activity profile to shared preference
-                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("USER_DATA", Context.MODE_PRIVATE);
+                SharedPreferences sharedPreferences = getActivity()
+                        .getSharedPreferences(SharedPreferencesConfigurations.USER_DATA, Context.MODE_PRIVATE);
+
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putBoolean("IS_USER_LOGGED_IN", true);
-                editor.putLong("LOGGED_USER_ID", userId);
+                editor.putBoolean(SharedPreferencesConfigurations.USER_IS_LOGGED_IN, true);
+                editor.putLong(SharedPreferencesConfigurations.LOGGED_USER_ID, userId);
                 editor.apply();
 
                 //

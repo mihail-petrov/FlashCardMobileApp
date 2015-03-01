@@ -46,7 +46,7 @@
     <string name="validation_email">Invalid E-mail address</string>
     <string name="validation_password">Invalid password field</string>
     <string name="validation_user_existence">User does not exists</string>
-    <string name="validation_user_profile">User does not exists</string>
+    <string name="validation_user_profile">User already exists</string>
 
     <!-- Card Content Messages -->
     <string name="front_card_content">Front Card must have content</string>

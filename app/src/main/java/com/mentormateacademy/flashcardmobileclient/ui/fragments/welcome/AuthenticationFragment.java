@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.mentormateacademy.flashcardmobileclient.R;
+import com.mentormateacademy.flashcardmobileclient.configurations.SharedPreferencesConfigurations;
 import com.mentormateacademy.flashcardmobileclient.data.singletons.DataHolder;
 import com.mentormateacademy.flashcardmobileclient.ui.activities.DeckListActivity;
 
@@ -21,8 +22,7 @@ public class AuthenticationFragment extends Fragment implements View.OnClickList
     public AuthenticationFragment(){}
 
     public static AuthenticationFragment newInstance(){
-        AuthenticationFragment fragment = new AuthenticationFragment();
-        return fragment;
+        return new AuthenticationFragment();
     }
 
 
@@ -32,13 +32,16 @@ public class AuthenticationFragment extends Fragment implements View.OnClickList
 
         mActivity = (setOnAuthenticationListener) activity;
 
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("USER_DATA", Context.MODE_PRIVATE);
-        boolean isUserLoggedIn = sharedPreferences.getBoolean("IS_USER_LOGGED_IN", false);
+        SharedPreferences sharedPreferences = getActivity()
+                .getSharedPreferences(SharedPreferencesConfigurations.USER_DATA, Context.MODE_PRIVATE);
+        boolean isUserLoggedIn = sharedPreferences.getBoolean(SharedPreferencesConfigurations.USER_IS_LOGGED_IN, false);
 
         if(isUserLoggedIn) {
 
             // get user profile
-            DataHolder.getData().setUserId(sharedPreferences.getLong("LOGGED_USER_ID", 0));
+            DataHolder.getData().setUserId(sharedPreferences
+                    .getLong(SharedPreferencesConfigurations.LOGGED_USER_ID, 0));
+
             // get deck profile
             Intent openActivity = new Intent(getActivity(), DeckListActivity.class);
             startActivity(openActivity);
